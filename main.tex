@@ -100,6 +100,7 @@
 \pagestyle{basicstyle}
 
 % ----------------------------------------------------------------- Phonetics -
+\cleardoublepage
 \chapter{Fonetika}                               \label{sec:phon}
 
 \section{Seznam islandských fonémů}              \label{sec:phon_phonems}
@@ -112,6 +113,7 @@
 \LTXtable{\columnwidth}{phon/consonants}
 
 % -------------------------------------------------------- Morphological keys -
+\cleardoublepage
 \chapter{Morfologický klíč}                      \label{sec:morpho}
 
 \section{Podstatné jméno, rod mužský}            \label{sec:morpho_m}
@@ -148,22 +150,25 @@
 \phantomsection
 \addcontentsline{toc}{chapter}
   {Seznam autorů fotografií a ilustrací}         \label{sec:photo}
-%\printindex
+\printindex
 
 % -------------------------------------------------------------- Bibliography -
 \cleardoublepage
 \phantomsection
 \addcontentsline{toc}{chapter}{Bibliografie}
 \nocite{*}
-%\printbibliography
+\printbibliography
 
 \onecolumn
+\pagestyle{empty}
+
 \chapter{Apendix: Islandská gramatika}
 %\includepdf[pages={1,2,3,4,5,6}]{gram.pdf}
 
+FIX
+
+\cleardoublepage\null\clearpage % inside of the cover
 \input{barcode}
-%\cleardoublepage\null
-%\pagestyle{empty}
 
 % ---------------------------------------------------------------- Back cover -
 \cleardoublepage\null\clearpage % inside of the cover
