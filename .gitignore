@@ -13,7 +13,7 @@
 # these rules might exclude image files for figures etc.
 # *.ps
 # *.eps
-# *.pdf
+*.pdf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
@@ -124,3 +124,21 @@ sympy-plots-for-*.tex/
 # WinEdt
 *.bak
 *.sav
+
+###############################################################################
+
+*~
+*.swp
+*.swo
+
+introduction/*
+letters/*
+morpho/*
+phon/*
+
+!introduction/DUMMYFILE
+!letters/DUMMYFILE
+!morpho/DUMMYFILE
+!phon/DUMMYFILE
+
+

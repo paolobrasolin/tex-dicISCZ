@@ -1,0 +1,172 @@
+% ################################################################## PREAMBLE #
+\input{preamble}
+
+% ################################################################## DOCUMENT #
+
+\begin{document}
+
+\onecolumn
+\pagestyle{basicstyle}
+\pagenumbering{gobble}
+
+% --------------------------------------------------------------- Front cover -
+\makecover\frontcoverimages
+
+% ------------------------------------------------------------------- Patitul -
+\cleardoublepage
+\begin{center}
+  \vspace*{2cm}
+  {\fontsize{20}{20}\selectfont\scshape%
+    \dictnameCZ\\\dictnameIS}
+\end{center}
+
+% --------------------------------------------------------------------- Titut -
+\cleardoublepage
+\begin{center}
+  \vspace*{2cm}
+  {\fontsize{24}{24}\selectfont\scshape%
+    \dictnameCZ\\\dictnameIS}
+\end{center}
+
+% ------------------------------------------------------------------ Impresum -
+\clearpage
+\input{ISBN}
+
+% --------------------------------------------------------- Table of contents -
+\pdfbookmark\contentsname{toc}    
+\tableofcontents
+\pagenumbering{arabic}
+
+% -------------------------------------- The study Icelandic-Czech dictionary -
+\chapter{O Islandsko-českém studijním slovníku}
+\input{introduction/uvod}
+
+% ------------- The history of the formation Icelandic-Czech dictionary study -
+\chapter{Historie tvorby Islandsko-českého studijního slovníku}
+\input{introduction/historie}
+
+\twocolumn
+\pagestyle{basicstyle}
+
+% --------------------------------------------------  Guide to the dictionary -
+\chapter{Průvodce po slovníku}         % THIS TITLE IS MISALIGNED
+\input{introduction/instructions}
+
+\onecolumn
+
+% ----------------------------------------- List of abbreviations and symbols -
+
+\chapter{Seznam použitých zkratek a symbolů}
+\begin{multicols}{2}
+\begin{description}%[\breaklabel\setleftmargin{40pt}\setlabelstyle{\bfseries}\addtolength{\itemsep}{-0.5\baselineskip}]
+\input{introduction/zkratky.tex}
+\end{description}
+\end{multicols}
+
+\chapter{Skrá yfir skammstafanir og tákn}
+\begin{multicols}{2}
+\begin{description}%[\breaklabel\setleftmargin{40pt}\setlabelstyle{\bfseries}\addtolength{\itemsep}{-0.5\baselineskip}]
+\input{introduction/zkratky_is}
+\end{description}
+\end{multicols}
+
+% ----------------------------------------------------- Not sure what this is -
+
+\chapter{Heslová část}
+\thispagestyle{empty}
+\clearpage
+
+\cleardoublepage
+\newgeometry{ textwidth  = 42\baselineskip
+            , textheight = 60\baselineskip
+            , hmarginratio = 1:1%2:3
+            , vmarginratio = 3:2
+            , twocolumn
+            }
+\pagestyle{dictstyle}
+
+% ------------------------------------------------------------ THE DICTIONARY -
+
+\newcommand*{\alphabet}{%
+  a%,aa,b,c,d,dd,e,ee,f,g,h,i,ii,j,k,l,m,
+  %n,o,oo,p,r,s,t,u,uu,v,w,y,yy,th,ae,oe
+  }
+
+\foreach \l in \alphabet{
+  \input{letters/\l.tex}}
+
+\restoregeometry
+\onecolumn
+\pagestyle{basicstyle}
+
+% ----------------------------------------------------------------- Phonetics -
+\chapter{Fonetika}                               \label{sec:phon}
+
+\section{Seznam islandských fonémů}              \label{sec:phon_phonems}
+\input{phon/phonems}
+
+\section{Výslovnost islandských samohlásek}      \label{sec:phon_vowels}
+\LTXtable{\columnwidth}{phon/vowels}
+
+\section{Výslovnost islandských souhlásek}       \label{sec:phon_consonants}
+\LTXtable{\columnwidth}{phon/consonants}
+
+% -------------------------------------------------------- Morphological keys -
+\chapter{Morfologický klíč}                      \label{sec:morpho}
+
+\section{Podstatné jméno, rod mužský}            \label{sec:morpho_m}
+{\small\LTXfw{morpho/m}}
+\input{morpho/m_info}
+
+\section{Podstatné jméno, rod ženský}            \label{sec:morpho_f}
+{\small\LTXfw{morpho/f}}
+\input{morpho/f_info}
+
+\section{Podstatné jméno, rod střední}           \label{sec:morpho_n}
+{\small\LTXfw{morpho/n}}
+\input{morpho/n_info}
+
+\section{Přídavné jméno}                         \label{sec:morpho_adj}
+{\small\LTXfw{morpho/adj}}
+\input{morpho/adj_info}
+
+\section{Zájmeno}                                \label{sec:morpho_pron}
+\input{morpho/pron.tex}
+
+\section{Číslovka}                               \label{sec:morpho_num}
+{\small\LTXfw{morpho/num.tex}}
+
+\section{Sloveso}                                \label{sec:morpho_v}
+\input{morpho/v.tex}
+\input{morpho/v_info.tex}
+
+\twocolumn
+\pagestyle{empty}
+
+% ------------------------------------------------- Photographs authors index -
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}
+  {Seznam autorů fotografií a ilustrací}         \label{sec:photo}
+%\printindex
+
+% -------------------------------------------------------------- Bibliography -
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliografie}
+\nocite{*}
+%\printbibliography
+
+\onecolumn
+\chapter{Apendix: Islandská gramatika}
+%\includepdf[pages={1,2,3,4,5,6}]{gram.pdf}
+
+\input{BARCODE}
+%\cleardoublepage\null
+%\pagestyle{empty}
+
+% ---------------------------------------------------------------- Back cover -
+\cleardoublepage\null\clearpage % inside of the cover
+\makecover\backcoverimages
+
+\end{document}
