@@ -9,7 +9,7 @@
 \usepackage[ headsep    =   \baselineskip
            , textwidth  = 42\baselineskip
            , textheight = 60\baselineskip
-           , hmarginratio = 1:1%2:3
+           , hmarginratio = 2:3
            , vmarginratio = 2:3
            , bindingoffset = 0cm % this might be useful
            %, showframe
@@ -91,7 +91,7 @@
   \end{tikzpicture}}
 
 % Draw a baseline grid on every page
-%\AddToShipoutPicture{\drawbaselinegrid}
+\AddToShipoutPicture{\drawbaselinegrid}
 
 
 % ####################################################### HYPERREF & PDF INFO #
@@ -495,23 +495,19 @@ thumb/.style={
                         \gdef\thumbnew{}%
 }
 
-\newcommand{\oddthumb}[1]{%
+\newcommand{\drawthumb}[2]{%
   % see pgfmanual.pdf for more information about this part
   \begin{tikzpicture}[remember picture, overlay]
-    \node [thumb, fill=\BoxColor{#1}, text centered, anchor=north east]
-       at ($(current page.north east)-%
+    \node [thumb, fill=\BoxColor{#1}, text centered, anchor=north #2]
+       at ($(current page.north #2)-%
 %            (0,\thumbtopmargin+\value{letternum}*\thumbheight)%
             (0,\thumbtopmargin+#1*\thumbheight)$) {\csname Let#1\endcsname};
    \end{tikzpicture}}
 
-\newcommand{\eventhumb}[1]{%
-  % see pgfmanual.pdf for more information about this part
-  \begin{tikzpicture}[remember picture, overlay]
-    \node [thumb, fill=\BoxColor{#1}, text centered, anchor=north west]
-       at ($(current page.north west)-%
-%            (0,\thumbtopmargin+\value{letternum}*\thumbheight)%
-            (0,\thumbtopmargin+#1*\thumbheight)$) {\csname Let#1\endcsname};
-   \end{tikzpicture}}
+% I had to exchange the east/west anchors of the thumbs
+% because they were being drawn flipped. I don't know why.
+\newcommand{\oddthumb} [1]{\drawthumb{#1}{west}}
+\newcommand{\eventhumb}[1]{\drawthumb{#1}{east}}
 
 % create a new command to set a new lettergroup with thumb indexes
 \newcommand{\lettergroup}[1]{%
@@ -519,9 +515,9 @@ thumb/.style={
   \refstepcounter{letternum}%
   \expandafter\gdef\csname Let\theletternum\endcsname{#1}%
   \xdef\thumbnew{\theletternum,\thumbnew}%
-  \fancyhead[LO]{\phvfamily{\textbf{\rightmark}}%
+  \fancyhead[LO]{\phvfamily\bfseries\rightmark%
     \expandafter\ethumbs\thumbnew\relax\relax\relax}%
-  \fancyhead[RE]{\phvfamily{\textbf{\leftmark}}%
+  \fancyhead[RE]{\phvfamily\bfseries\leftmark%
     \expandafter\othumbs\thumbnew\relax\relax\relax}%
 }
 
@@ -630,8 +626,8 @@ thumb/.style={
 
 % #################################################################### COVERS #
 
-\def\dictnameCZ{Islandsko-český studijní slovník}
-\def\dictnameIS{Íslensk-tékknesk stúdentaorðabók}
+\def\dictnameCZ{Islandsko-Český Studijní Slovník}
+\def\dictnameIS{Íslensk-Tékknesk Stúdentaorðabók}
 
 \newcommand*{\frontcoverimages}{%
   ds_image_blaberjalyng_0_2.jpg,
@@ -657,9 +653,9 @@ thumb/.style={
  \pagecolor{title}\afterpage\nopagecolor
  \begin{center}
  \vspace*{0.3cm}%{\fill}
- {\fontsize{20}{20}\scshape\color{white}%
+ {\fontsize{20}{24}\scshape\color{white}%
    \dictnameCZ\\\dictnameIS}
- %\vspace*{1em}                        % Maybe a spacer?
+ \vspace*{1em}                        % I think this is necessary
  \begin{figure}[ht]\centering%
    \setlength\fboxsep{0pt}\setlength\fboxrule{0.5pt}%
    \foreach \file in \frontcoverimages{
