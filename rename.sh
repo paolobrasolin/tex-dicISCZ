@@ -19,3 +19,5 @@ mv latex_consonants.tex phon/consonants.tex
 mv latex_vowels.tex     phon/vowels.tex
 mv list_of_phonems.tex  phon/phonems.tex
 
+mv bb8.pdf photo_icon.pdf
+
