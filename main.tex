@@ -4,7 +4,7 @@
 % ################################################################## DOCUMENT #
 
 \begin{document}
-
+\iffalse
 \onecolumn
 \pagestyle{basicstyle}
 
@@ -100,7 +100,7 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 \chapter{Heslová část}
 \thispagestyle{empty}
 \clearpage
-
+\fi
 % ------------------------------------------------------------ THE DICTIONARY -
 \cleardoublepage
 \newgeometry{ textwidth  = 42\baselineskip
@@ -118,7 +118,7 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 
 \foreach \l in \alphabet{
   \input{letters/\l.tex}}
-
+\iffalse
 \restoregeometry
 \onecolumn
 \pagestyle{basicstyle}
@@ -200,5 +200,5 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 % ---------------------------------------------------------------- Back cover -
 \cleardoublepage\null\clearpage % inside of the cover
 \makecover\backcoverimages
-
+\fi
 \end{document}

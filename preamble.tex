@@ -322,36 +322,29 @@
 
 % ################################################################### FIGURES #
 
-\usepackage[export]{adjustbox} % loads also graphicx
+\usepackage{adjustbox} % loads also graphicx
 
 \graphicspath{%
   {/home/chejnik/Dokumenty/hvalur.org/images/biolib/full/}%
   {/home/chejnik/Dokumenty/hvalur.org/images/uploaded_files/}}
 
-\newcommand\entryfigure[3]{
-  \setlength\fboxsep{0pt}\setlength\fboxrule{0.5pt}
-  \def\imagebox{\fbox{%
-    \includegraphics [ max height = 0.8\columnwidth
-                     , max width  = 0.8\columnwidth ] {#1}}}
-  \newlength\imageheight
-  \settototalheight\imageheight{\imagebox}
-  \addtolength\imageheight{\fboxrule}
-  \newcounter{imagelines}
-  \setcounter{imagelines}{1+\imageheight/\baselineskip}
-  \newlength\imageskip
-  \setlength{\imageskip}{\baselineskip*\value{imagelines}-\imageheight+\fboxrule}
-  \setlength\intextsep        {0pt}
-  \setlength\textfloatsep     {0pt}
-  \setlength\abovecaptionskip {0pt}
-  \setlength\belowcaptionskip {0pt} 
-  \begin{figure}[ht]
-    \centering\vspace{\imageskip}\imagebox\caption{#2}
-  \end{figure}
-  \index{#3}
-}
+\newlength\dicfigheight
+\newlength\dicfigskip
 
-\newcommand{\makefigure}[2]{}
-\newcommand{\makefigureh}[2]{}
+\newcommand\dictionaryfigure[3]{ % {filename}{caption}{index entry}
+  \setlength\fboxsep{0pt}\setlength\fboxrule{0.5pt}
+  \def\dicfigbox{\fbox{%
+    \adjincludegraphics [ max height = 0.8\columnwidth
+                        , max width  = 0.8\columnwidth ] {#1}}}
+  \setlength\abovecaptionskip {\dp\strutbox}
+  \setlength\belowcaptionskip {\ht\strutbox} 
+  \setlength\dicfigheight {\heightof\dicfigbox+\fboxrule}
+  \setlength\dicfigskip
+    {\baselineskip*\numexpr1+\dicfigheight/\baselineskip\relax-\dicfigheight}
+  \begin{figure}[ht]
+    \centering\vspace*{\dicfigskip}\dicfigbox\caption{#2}\index{#3}
+  \end{figure}
+}
 
 
 % #################################################################### COLORS #
