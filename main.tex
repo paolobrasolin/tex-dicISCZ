@@ -4,15 +4,16 @@
 % ################################################################## DOCUMENT #
 
 \begin{document}
-\iffalse
-\onecolumn
+
 \pagestyle{basicstyle}
 
 % --------------------------------------------------------------- Front cover -
 \makecover\frontcoverimages
 
 \pagenumbering{gobble}
+
 % ------------------------------------------------------------------- Patitul -
+
 \cleardoublepage
 \begin{center}
   %\vspace*{2cm}{\fontsize{20}{20}\selectfont\scshape\dictnameCZ\\\dictnameIS}
@@ -22,6 +23,7 @@
 \end{center}
 
 % --------------------------------------------------------------------- Titut -
+
 \cleardoublepage
 \begin{center}
   %\vspace*{2cm}{\fontsize{24}{24}\selectfont\scshape\dictnameCZ\\\dictnameIS}
@@ -31,6 +33,7 @@
 \end{center}
 
 % ------------------------------------------------------------------ Impresum -
+
 \clearpage
 \noindent\begin{minipage}[t][\textheight][t]{\textwidth}
 \def\bls{\baselineskip}
@@ -60,28 +63,32 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 \end{minipage}
 
 % --------------------------------------------------------- Table of contents -
+
 \pdfbookmark\contentsname{toc}    
 \tableofcontents
 \pagenumbering{arabic}
 
 % -------------------------------------- The study Icelandic-Czech dictionary -
+
 \chapter{O Islandsko-českém studijním slovníku}
 \input{introduction/uvod}
 
 % ------------- The history of the formation Icelandic-Czech dictionary study -
+
 \chapter{Historie tvorby Islandsko-českého studijního slovníku}
 \input{introduction/historie}
 
-\twocolumn
-\pagestyle{basicstyle}
-
 % --------------------------------------------------  Guide to the dictionary -
+
+\twocolumn
+
 \chapter{Průvodce po slovníku}         % THIS TITLE IS MISALIGNED
 \input{introduction/instructions}
 
 \onecolumn
 
 % ----------------------------------------- List of abbreviations and symbols -
+
 \chapter{Seznam použitých zkratek a symbolů}
 \begin{multicols}{2}
 \begin{description}%[\breaklabel\setleftmargin{40pt}\setlabelstyle{\bfseries}\addtolength{\itemsep}{-0.5\baselineskip}]
@@ -97,18 +104,16 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 \end{multicols}
 
 % ----------------------------------------------------- Not sure what this is -
+
 \chapter{Heslová část}
-\thispagestyle{empty}
-\clearpage
-\fi
+%\thispagestyle{empty}
+%\clearpage
+
 % ------------------------------------------------------------ THE DICTIONARY -
+
 \cleardoublepage
-\newgeometry{ textwidth  = 42\baselineskip
-            , textheight = 60\baselineskip
-            , hmarginratio = 2:3
-            , vmarginratio = 3:2
-            , twocolumn
-            }
+
+\dictionarygeometry
 \pagestyle{dictstyle}
 
 \newcommand*{\alphabet}{%
@@ -118,13 +123,14 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 
 \foreach \l in \alphabet{
   \input{letters/\l.tex}}
-\iffalse
+
 \restoregeometry
-\onecolumn
 \pagestyle{basicstyle}
 
 % ----------------------------------------------------------------- Phonetics -
+
 \cleardoublepage
+
 \chapter{Fonetika}                               \label{sec:phon}
 
 \section{Seznam islandských fonémů}              \label{sec:phon_phonems}
@@ -137,7 +143,9 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 \LTXtable{\columnwidth}{phon/consonants}
 
 % -------------------------------------------------------- Morphological keys -
+
 \cleardoublepage
+
 \chapter{Morfologický klíč}                      \label{sec:morpho}
 
 \section{Podstatné jméno, rod mužský}            \label{sec:morpho_m}
@@ -166,11 +174,11 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 \input{morpho/v.tex}
 \input{morpho/v_info.tex}
 
-\twocolumn
-\pagestyle{empty}
-
 % ------------------------------------------------- Photographs authors index -
+
 \cleardoublepage
+%\pagestyle{empty}
+%\pagestyle{indexstyle}
 \phantomsection
 \addcontentsline{toc}{chapter}
   {Seznam autorů fotografií a ilustrací}         \label{sec:photo}
@@ -178,6 +186,7 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 
 % -------------------------------------------------------------- Bibliography -
 \cleardoublepage
+\twocolumn
 \phantomsection
 \addcontentsline{toc}{chapter}{Bibliografie}
 \nocite{*}
@@ -200,5 +209,5 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 % ---------------------------------------------------------------- Back cover -
 \cleardoublepage\null\clearpage % inside of the cover
 \makecover\backcoverimages
-\fi
+
 \end{document}

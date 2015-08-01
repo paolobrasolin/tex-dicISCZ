@@ -1,3 +1,5 @@
+% ########################################################### DOCUMENT CLASS #
+
 \documentclass[ draft
               , demo  % black boxes instead of figures
               , 8pt, c5paper, twoside, openright]{extbook}
@@ -6,17 +8,35 @@
 %\documentclass[ 8pt, B5paper, twoside, openright]{extbook} 
 % change picture width from 7.2cm to 6cm
 
-\usepackage[ headsep    =   \baselineskip
-           , textwidth  = 42\baselineskip
-           , textheight = 60\baselineskip
-           , hmarginratio = 2:3
-           , vmarginratio = 2:3
-           , bindingoffset = 0cm % this might be useful
-           %, showframe
-           ]{geometry}
+
+% ############################################################ PAGE GEOMETRY #
+
+\usepackage%[showframe]
+           {geometry}
+
+% Basic geometry of document
+\geometry
+  { headsep    =   \baselineskip
+  , textwidth  = 42\baselineskip
+  , textheight = 60\baselineskip
+  , hmarginratio = 2:3
+  , vmarginratio = 2:3
+  , bindingoffset = 0cm
+  , onecolumn
+  }
+
+% Geometry of the dictionary section
+\newcommand\dictionarygeometry{\newgeometry
+  { textwidth  = 42\baselineskip
+  , textheight = 60\baselineskip
+  , hmarginratio = 2:3
+  , vmarginratio = 3:2
+  , bindingoffset = 0cm
+  , twocolumn
+  }}
 
 
-% ####################################### LANGUAGES, ENCODING, FONTS, SYMBOLS #
+% ###################################################### LANGUAGES, ENCODING #
 
 \usepackage[icelandic, latin, czech]{babel}
 \usepackage{csquotes}
@@ -24,6 +44,9 @@
 \usepackage[utf8]{inputenc}
 \DeclareUnicodeCharacter{00A0}{~} % finds hidden non-breakable space
 \usepackage[T1]{fontenc}
+
+
+% ########################################################### FONTS, SYMBOLS #
 
 \usepackage{tgpagella}
 \usepackage{stmaryrd}
@@ -34,7 +57,6 @@
 
 \usepackage[scaled=0.88]{helvet} % ss
 \def\phvfamily{\fontfamily{phv}\selectfont}
-
 
 
 % ######################################################### ASSORTED PACKAGES #
@@ -65,7 +87,8 @@
 
 \usepackage{pgffor}
 
-% ############################################################ DRAFTING TOOLS #
+
+% ############################################################ BASELINE GRID #
 
 \usepackage{eso-pic}
 \usepackage{tikzpagenodes}
@@ -94,6 +117,24 @@
 \AddToShipoutPicture{\drawbaselinegrid}
 
 
+% #################################################################### LAYOUT #
+
+% Two columns layout ruler
+\setlength\columnsep    {\baselineskip}
+\setlength\columnseprule{0.4pt}
+
+\raggedbottom
+
+% Temporarily suppress warnings
+\hbadness=10000
+\vbadness=10000
+
+\setlength\parskip{0pt}               % better avoid glue
+\setlength\emergencystretch{20pt}     % to temporarily settle overf hboxes
+%\renewcommand\baselinestretch{1.025}
+%\setlength\baselineskip{9.6pt}
+
+
 % ####################################################### HYPERREF & PDF INFO #
 
 % unicode neccessary so that national characters in hypersetup appear ok
@@ -119,8 +160,9 @@
 % ################################################################## METADATA #
 
 \title{%
-  \textbf{Islandsko-český studijní slovník}
-  \thanks{Tato kniha byla vytvořena v \LaTeX{}u pod Ubuntu 14.04. Poděkování patří všem autorům, kteří publikují pod svobodnými licencemi.}}
+  \textbf{Islandsko-český studijní slovník}%
+  \thanks{Tato kniha byla vytvořena v \LaTeX{}u pod Ubuntu 14.04.%
+    Poděkování patří všem autorům, kteří publikují pod svobodnými licencemi.}}
 \author{Aleš Chejn, Ján Zaťko, Jón Gíslason}
 \date{říjen 2011}
 
@@ -137,16 +179,20 @@
 
 % index of authors of photographs
 \makeindex
+%  [ columns   = 2
+%  , columnsep = \columnsep
+%  , columnseprule
+%  ]
+
 
 % icelandic rules start
 \usepackage{filecontents}
-\begingroup % to limit scope of \mygroup
+% MEMO: mygroup is used in v_info, etc
 \def\mygroup#1{\textbf{#1}}
 \begin{filecontents*}{mal-style.xdy}
 ;; mal-style.xdy
 (markup-letter-group :open-head "~n\mygroup{" :close-head "}")
 \end{filecontents*}
-\endgroup
 % icelandic rules end
 
 
@@ -180,24 +226,6 @@
   \fancyhead[RE,RO]{\phvfamily\bfseries\leftmark}
 }
   
-
-% #################################################################### LAYOUT #
-
-% middle rule
-\setlength\columnsep    {\baselineskip}
-\setlength\columnseprule{0.4pt}
-
-\raggedbottom
-
-% Temporarily suppress warnings
-\hbadness=10000
-\vbadness=10000
-
-\setlength\parskip{0pt}               % better avoid glue
-\setlength\emergencystretch{10pt}     % to temporarily settle overf hboxes
-%\renewcommand\baselinestretch{1.025}
-%\setlength\baselineskip{9.6pt}
-
 
 % ##################################################################### LISTS #
 
@@ -256,19 +284,19 @@
 \usepackage{longtable}
 \usepackage{ltxtable}
 
-%\LetLtxMacro\oldtabularx\tabularx
-%\LetLtxMacro\oldendtabularx\endtabularx
-%\newenvironment{shorttabularx}[2]
-%  {\oldtabularx{#1}{#2}}
-%  {\oldendtabularx}
+%%% \LetLtxMacro\oldtabularx\tabularx
+%%% \LetLtxMacro\oldendtabularx\endtabularx
+%%% \newenvironment{shorttabularx}[2]
+%%%   {\oldtabularx{#1}{#2}}
+%%%   {\oldendtabularx}
 
 \newcommand\LTXfw[1]{\LTXtable{\columnwidth}{#1}}
 
-%\LetLtxMacro\oldtabularx\tabularx
-%\LetLtxMacro\oldendtabularx\endtabularx
-%\newenvironment{longtabularx}[2]
-%  {\oldtabularx{#1}{#2}}
-%  {\oldendtabularx}
+%%% \LetLtxMacro\oldtabularx\tabularx
+%%% \LetLtxMacro\oldendtabularx\endtabularx
+%%% \newenvironment{longtabularx}[2]
+%%%   {\oldtabularx{#1}{#2}}
+%%%   {\oldendtabularx}
 
 % ------------------------------------------------- I HAVE NO CLUE WHAT THIS IS
 \begingroup
@@ -563,7 +591,7 @@ thumb/.style={
   {} {} {\titlerule*[2\baselineskip]{}\contentspage}
 
 \titlecontents {section} [\baselineskip] {} {} {}
-  {\titlerule*[2\baselineskip]{.}\contentspage}
+  {\titlerule*[2\baselineskip]{}\contentspage}
 
 
 % #################################################### ASSORTED CUSTOM MACROS #
