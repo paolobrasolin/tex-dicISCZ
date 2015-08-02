@@ -1,6 +1,11 @@
 % ################################################################## PREAMBLE #
 \input{preamble}
 
+\newif\ifinputletters \inputlettersfalse
+\newif\ifinputphon    \inputphonfalse
+\newif\ifinputmorpho  \inputmorphofalse
+
+
 % ################################################################## DOCUMENT #
 
 \begin{document}
@@ -18,7 +23,7 @@
 \begin{center}
   %\vspace*{2cm}{\fontsize{20}{20}\selectfont\scshape\dictnameCZ\\\dictnameIS}
   \vspace*{\stretch 1}
-  {\fontsize{20}{24}\selectfont\scshape\dictnameCZ\\\dictnameIS}
+  {\Huge\scshape\dictnameCZ\\\dictnameIS}
   \vspace{\stretch 4}
 \end{center}
 
@@ -28,7 +33,7 @@
 \begin{center}
   %\vspace*{2cm}{\fontsize{24}{24}\selectfont\scshape\dictnameCZ\\\dictnameIS}
   \vspace*{\stretch 1}
-  {\fontsize{25}{30}\selectfont\scshape\dictnameCZ\\\dictnameIS}
+  {\HUGE\scshape\dictnameCZ\\\dictnameIS}
   \vspace{\stretch 2}
 \end{center}
 
@@ -49,7 +54,7 @@ Poděkování:\\
 Finanční příspěvek na výtisk exemplářů určených knihovnám\\ v České republice,
 Slovenské republice a na Islandu poskytl:\\
   \textbf{Petr Mikeš, Dorota Nierychlewska-Chejn, Jiřina Chejnová, Otta Chejn}
-\vfill
+\vspace{36\baselineskip}
 \textbf{Hvalur.org - \the\year}\\
 Licence: \textbf{GNU Free Documentation License}\\
 Sazba: % \textbf{Paolo al-Imk\=an\=\i\ Brasolin}
@@ -76,16 +81,15 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 % ------------- The history of the formation Icelandic-Czech dictionary study -
 
 \chapter{Historie tvorby Islandsko-českého studijního slovníku}
+\longtitleskip
 \input{introduction/historie}
 
 % --------------------------------------------------  Guide to the dictionary -
 
-\twocolumn
-
-\chapter{Průvodce po slovníku}         % THIS TITLE IS MISALIGNED
+\chapter{Průvodce po slovníku}
+\begin{multicols}{2}
 \input{introduction/instructions}
-
-\onecolumn
+\end{multicols}
 
 % ----------------------------------------- List of abbreviations and symbols -
 
@@ -111,6 +115,8 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 
 % ------------------------------------------------------------ THE DICTIONARY -
 
+\ifinputletters
+
 \cleardoublepage
 
 \dictionarygeometry
@@ -127,7 +133,10 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 \restoregeometry
 \pagestyle{basicstyle}
 
+\fi
+
 % ----------------------------------------------------------------- Phonetics -
+\ifinputphon
 
 \cleardoublepage
 
@@ -142,7 +151,11 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 \section{Výslovnost islandských souhlásek}       \label{sec:phon_consonants}
 \LTXtable{\columnwidth}{phon/consonants}
 
+\fi
+
 % -------------------------------------------------------- Morphological keys -
+
+\ifinputmorpho
 
 \cleardoublepage
 
@@ -174,15 +187,17 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 \input{morpho/v.tex}
 \input{morpho/v_info.tex}
 
+\fi
+
 % ------------------------------------------------- Photographs authors index -
 
 \cleardoublepage
 %\pagestyle{empty}
 %\pagestyle{indexstyle}
-\phantomsection
-\addcontentsline{toc}{chapter}
-  {Seznam autorů fotografií a ilustrací}         \label{sec:photo}
-\printindex
+%\phantomsection
+%\addcontentsline{toc}{chapter}
+%  {Seznam autorů fotografií a ilustrací}         \label{sec:photo}
+\printindex[figures]
 
 % -------------------------------------------------------------- Bibliography -
 \cleardoublepage

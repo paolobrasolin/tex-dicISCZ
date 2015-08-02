@@ -42,9 +42,31 @@
 \usepackage{csquotes}
 
 \usepackage[utf8]{inputenc}
-\DeclareUnicodeCharacter{00A0}{~} % finds hidden non-breakable space
-\usepackage[T1]{fontenc}
 
+\DeclareUnicodeCharacter{00A0}{~} % finds hidden non-breakable space
+
+% ----------------- THIS IS EVIL AND SHOULD NOT BE DONE EVER -----------------
+% Czech uppercase letters with diacritics:
+\DeclareUnicodeCharacter{00C1}{\protect\vphantom{A}\smash{\' A}} % Á
+\DeclareUnicodeCharacter{010C}{\protect\vphantom{C}\smash{\v C}} % Č
+\DeclareUnicodeCharacter{010E}{\protect\vphantom{D}\smash{\v D}} % Ď
+\DeclareUnicodeCharacter{00C9}{\protect\vphantom{E}\smash{\' E}} % É
+\DeclareUnicodeCharacter{011A}{\protect\vphantom{E}\smash{\v E}} % Ě
+\DeclareUnicodeCharacter{00CD}{\protect\vphantom{I}\smash{\' I}} % Í
+\DeclareUnicodeCharacter{0147}{\protect\vphantom{N}\smash{\v N}} % Ň
+\DeclareUnicodeCharacter{00D3}{\protect\vphantom{O}\smash{\' O}} % Ó
+\DeclareUnicodeCharacter{0158}{\protect\vphantom{R}\smash{\v R}} % Ř
+\DeclareUnicodeCharacter{0160}{\protect\vphantom{S}\smash{\v S}} % Š
+\DeclareUnicodeCharacter{0164}{\protect\vphantom{T}\smash{\v T}} % Ť
+\DeclareUnicodeCharacter{00DA}{\protect\vphantom{U}\smash{\' U}} % Ú
+\DeclareUnicodeCharacter{016E}{\protect\vphantom{U}\smash{\r U}} % Ů
+\DeclareUnicodeCharacter{00DD}{\protect\vphantom{Y}\smash{\' Y}} % Ý
+\DeclareUnicodeCharacter{017D}{\protect\vphantom{Z}\smash{\v Z}} % Ž
+% Icelandic uppercase letters with diacritics: ÁÉÍÓÚÝ (ÐÞÆ) and
+\DeclareUnicodeCharacter{00D6}{\protect\vphantom{O}\smash{\" O}} % Ö
+% ------------------ THAT WAS EVIL AND SHOULD NEVER BE DONE ------------------
+
+\usepackage[T1]{fontenc}
 
 % ########################################################### FONTS, SYMBOLS #
 
@@ -81,7 +103,7 @@
 \usepackage{multicol}
 \usepackage{rotating}
 
-%\usepackage{etoolbox} % http://ctan.org/pkg/etoolbox
+\usepackage{etoolbox}
 
 \usepackage[ISBN=978-80-260-2385-2,SC0]{ean13isbn}
 
@@ -125,13 +147,15 @@
 
 \raggedbottom
 
+\topskip=\baselineskip % Baselines aligned to grid
+
 % Temporarily suppress warnings
 \hbadness=10000
 \vbadness=10000
 
 \setlength\parskip{0pt}               % better avoid glue
 \setlength\emergencystretch{20pt}     % to temporarily settle overf hboxes
-%\renewcommand\baselinestretch{1.025}
+%\renewcommand\baselinestretch{1.0}
 %\setlength\baselineskip{9.6pt}
 
 
@@ -175,22 +199,23 @@
 
 % ##################################################################### INDEX #
 
-\usepackage{makeidx}
+\usepackage{imakeidx}
 
 % index of authors of photographs
 \makeindex
-%  [ columns   = 2
-%  , columnsep = \columnsep
-%  , columnseprule
-%  ]
-
+  [ name = figures
+  , title = {Seznam autorů fotografií a ilustrací}
+  , intoc
+  , columnseprule
+  , columnsep = \columnsep
+  , noautomatic                       % We handle this in make.sh
+  ]
 
 % icelandic rules start
 \usepackage{filecontents}
-% MEMO: mygroup is used in v_info, etc
 \def\mygroup#1{\textbf{#1}}
-\begin{filecontents*}{mal-style.xdy}
-;; mal-style.xdy
+\begin{filecontents*}{style.xdy}
+;; style.xdy
 (markup-letter-group :open-head "~n\mygroup{" :close-head "}")
 \end{filecontents*}
 % icelandic rules end
@@ -370,7 +395,7 @@
   \setlength\dicfigskip
     {\baselineskip*\numexpr1+\dicfigheight/\baselineskip\relax-\dicfigheight}
   \begin{figure}[ht]
-    \centering\vspace*{\dicfigskip}\dicfigbox\caption{#2}\index{#3}
+    \centering\vspace*{\dicfigskip}\dicfigbox\caption{#2}\index[figures]{#3}
   \end{figure}
 }
 
@@ -546,8 +571,8 @@ thumb/.style={
 % ############################################################## LOCALIZATION #
 
 % renames the index name
-\addto\captionsczech{%
-  \renewcommand\indexname{{Seznam autorů fotografií a ilustrací}}}
+%\addto\captionsczech{%
+%  \renewcommand\indexname{{Seznam autorů fotografií a ilustrací}}}
 
 % renames the contents name
 \addto\captionsczech{%
@@ -572,10 +597,25 @@ thumb/.style={
 
 % GOT TO PUT PARBOXES FOR MULTILINE TITLES
 
-\titleformat {\chapter} [block] {\centering\bfseries} {} {0pt}
-  {\ghostdrop{1.0}{\huge\MakeUppercase{#1}}}
-  % PROBLEM HERE 1.0 ok for onecolumn 1.3 ok for 2col --- WHY?!
-  % 0.3\baseline = \dp\strutbox so it's not a magic number!
+%\makeatletter
+%\def\cor{\if@twocolumn1.3\else1.0\fi}
+%\makeatother
+
+\setlength\fboxsep{0pt}
+
+\def\HUGE {\fontsize{23.887872pt}{3\baselineskip}\selectfont}
+\def\Huge {\fontsize{19.906560pt}{3\baselineskip}\selectfont}
+\def\huge {\fontsize{16.588800pt}{3\baselineskip}\selectfont}
+\def\LARGE{\fontsize{13.824000pt}{2\baselineskip}\selectfont}
+\def\Large{\fontsize{11.520000pt}{2\baselineskip}\selectfont}
+\def\large{\fontsize{ 9.600000pt}{2\baselineskip}\selectfont}
+
+\titleformat {\chapter} {} {} {0pt}
+  {\ghostdrop{1.0}
+     {\parbox[t]{\columnwidth}
+        {\LARGE\bfseries\centering\MakeUppercase{#1}}}}
+
+\def\longtitleskip{\vspace{2\baselineskip}}
 
 \titleformat {\section} {\bfseries} {} {0pt}
   {\ghostdrop{1.0}{\Large#1}}
@@ -647,8 +687,8 @@ thumb/.style={
 
 % #################################################################### COVERS #
 
-\def\dictnameCZ{Islandsko-Český Studijní Slovník}
-\def\dictnameIS{Íslensk-Tékknesk Stúdentaorðabók}
+\def\dictnameCZ{islandsko-český studijní slovník}
+\def\dictnameIS{íslensk-tékknesk stúdentaorðabók}
 
 \newcommand*{\frontcoverimages}{%
   ds_image_blaberjalyng_0_2.jpg,
@@ -674,7 +714,7 @@ thumb/.style={
  \pagecolor{title}\afterpage\nopagecolor
  \begin{center}
  \vspace*{0.3cm}%{\fill}
- {\fontsize{20}{24}\scshape\color{white}%
+ {\Huge\scshape\color{white}%
    \dictnameCZ\\\dictnameIS}
  \vspace*{1em}                        % I think this is necessary
  \begin{figure}[ht]\centering%
