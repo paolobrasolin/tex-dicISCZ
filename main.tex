@@ -1,25 +1,36 @@
-% ################################################################## PREAMBLE #
+% ############################################### PREAMBLE AND CONTROL PANEL #
+
 \input{preamble}
 
-\newif\ifinputletters \inputlettersfalse
-\newif\ifinputphon    \inputphonfalse
-\newif\ifinputmorpho  \inputmorphofalse
+\newif\ifmakecovers        \makecoverstrue
+\newif\ifmakefrontmatter   \makefrontmatterfalse
+\newif\ifinputintroduction \inputintroductiontrue
+\newif\ifinputletters      \inputlettersfalse
+\newif\ifinputphon         \inputphonfalse
+\newif\ifinputmorpho       \inputmorphofalse
+\newif\ifmakebackmatter    \makebackmattertrue
 
 
-% ################################################################## DOCUMENT #
+% ################################################################# DOCUMENT #
 
 \begin{document}
 
-\pagestyle{basicstyle}
-
-% --------------------------------------------------------------- Front cover -
-\makecover\frontcoverimages
-
 \pagenumbering{gobble}
 
-% ------------------------------------------------------------------- Patitul -
+% -------------------------------------------------------------- Front cover -
+
+\ifmakecovers
+  \makecoverwith\frontcoverimages
+\fi
+
+% ============================================================= FRONT MATTER =
+
+\ifmakefrontmatter 
+
+% ------------------------------------------------------------------ Patitul -
 
 \cleardoublepage
+
 \begin{center}
   %\vspace*{2cm}{\fontsize{20}{20}\selectfont\scshape\dictnameCZ\\\dictnameIS}
   \vspace*{\stretch 1}
@@ -27,9 +38,10 @@
   \vspace{\stretch 4}
 \end{center}
 
-% --------------------------------------------------------------------- Titut -
+% -------------------------------------------------------------------- Titut -
 
 \cleardoublepage
+
 \begin{center}
   %\vspace*{2cm}{\fontsize{24}{24}\selectfont\scshape\dictnameCZ\\\dictnameIS}
   \vspace*{\stretch 1}
@@ -37,20 +49,20 @@
   \vspace{\stretch 2}
 \end{center}
 
-% ------------------------------------------------------------------ Impresum -
+% ----------------------------------------------------------------- Impresum -
 
 \clearpage
+
 \noindent\begin{minipage}[t][\textheight][t]{\textwidth}
-\def\bls{\baselineskip}
 Autoři \textit{Islandsko-českého studijního slovníku}:\\
-  \textbf{Aleš Chejn, Ján Zaťko, Jón Gíslason}\\[\bls]
+  \textbf{Aleš Chejn, Ján Zaťko, Jón Gíslason}\\[\baselineskip]
 Autor \textit{Islandské gramatiky}:\\
-  \textbf{Vojtěch Kupča}\\[\bls]
+  \textbf{Vojtěch Kupča}\\[\baselineskip]
 Poděkování:\\
   \textbf{Dorotě Nierychlewské-Chejn, Jiřině Hanzlové, Jiřině Chejnové,
           Simoně Petrásové,\\ Petru Mikešovi, Renatě Peškové Emilsson,
           Amiru Mulahumici, Kristýně Antonové,\\ Martině Kašparové,
-          Lucii Brabcové}\\[\bls]
+          Lucii Brabcové}\\[\baselineskip]
 Finanční příspěvek na výtisk exemplářů určených knihovnám\\ v České republice,
 Slovenské republice a na Islandu poskytl:\\
   \textbf{Petr Mikeš, Dorota Nierychlewska-Chejn, Jiřina Chejnová, Otta Chejn}
@@ -59,83 +71,101 @@ Slovenské republice a na Islandu poskytl:\\
 Licence: \textbf{GNU Free Documentation License}\\
 Sazba: % \textbf{Paolo al-Imk\=an\=\i\ Brasolin}
   \textbf\LaTeX\ za cenné asistance uživatelů
-  \textbf{\TeX\ - \LaTeX\ Stack Exchange}\\[\bls]
-\textbf\ISBN\\[\bls]
+  \textbf{\TeX\ - \LaTeX\ Stack Exchange}\\[\baselineskip]
+\textbf\ISBN\\[\baselineskip]
 Design pevné vazby: \textbf{Dorota Nierychlewska-Chejn, Jiřina Chejnová}\\
 Tisk: \textbf{Tiskárna Melmen, Pardubice}\\
 Heslová část vysázena patkovým fontem Tpagella,
 hesla bezpatkovým fontem {\phvfamily Helvetica}.
 \end{minipage}
 
-% --------------------------------------------------------- Table of contents -
+% -------------------------------------------------------- Table of contents -
+
+\cleardoublepage
 
 \pdfbookmark\contentsname{toc}    
+
 \tableofcontents
+
+\fi
+
 \pagenumbering{arabic}
 
-% -------------------------------------- The study Icelandic-Czech dictionary -
+% ============================================================= INTRODUCTION =
+
+\ifinputintroduction
+
+% ------------------------------------- The study Icelandic-Czech dictionary -
 
 \chapter{O Islandsko-českém studijním slovníku}
 \input{introduction/uvod}
 
-% ------------- The history of the formation Icelandic-Czech dictionary study -
+% ------------ The history of the formation Icelandic-Czech dictionary study -
 
 \chapter{Historie tvorby Islandsko-českého studijního slovníku}
-\longtitleskip
+\longchapterskip
 \input{introduction/historie}
 
-% --------------------------------------------------  Guide to the dictionary -
+% -------------------------------------------------  Guide to the dictionary -
 
 \chapter{Průvodce po slovníku}
 \begin{multicols}{2}
 \input{introduction/instructions}
 \end{multicols}
 
-% ----------------------------------------- List of abbreviations and symbols -
+% ---------------------------------------- List of abbreviations and symbols -
 
 \chapter{Seznam použitých zkratek a symbolů}
 \begin{multicols}{2}
-\begin{description}%[\breaklabel\setleftmargin{40pt}\setlabelstyle{\bfseries}\addtolength{\itemsep}{-0.5\baselineskip}]
+\begin{description}
+%[\breaklabel\setleftmargin{40pt}\setlabelstyle{\bfseries}
+%\addtolength{\itemsep}{-0.5\baselineskip}]
 \input{introduction/zkratky.tex}
 \end{description}
 \end{multicols}
 
 \chapter{Skrá yfir skammstafanir og tákn}
 \begin{multicols}{2}
-\begin{description}%[\breaklabel\setleftmargin{40pt}\setlabelstyle{\bfseries}\addtolength{\itemsep}{-0.5\baselineskip}]
+\begin{description}
+%[\breaklabel\setleftmargin{40pt}\setlabelstyle{\bfseries}
+%\addtolength{\itemsep}{-0.5\baselineskip}]
 \input{introduction/zkratky_is}
 \end{description}
 \end{multicols}
 
-% ----------------------------------------------------- Not sure what this is -
+% ---------------------------------------------------- Not sure what this is -
 
 \chapter{Heslová část}
-%\thispagestyle{empty}
-%\clearpage
+\clearpage
 
-% ------------------------------------------------------------ THE DICTIONARY -
+\fi
+
+% =========================================================== THE DICTIONARY =
 
 \ifinputletters
 
 \cleardoublepage
 
 \dictionarygeometry
-\pagestyle{dictstyle}
+\pagestyle{myheadings}
 
-\newcommand*{\alphabet}{%
-  a%,aa,b,c,d,dd,e,ee,f,g,h,i,ii,j,k,l,m,
-  %n,o,oo,p,r,s,t,u,uu,v,w,y,yy,th,ae,oe
-  }
+%\newcommand*{\alphabet}{%
+%  a%,aa,b,c,d,dd,e,ee,f,g,h,i,ii,j,k,l,m,
+%  %n,o,oo,p,r,s,t,u,uu,v,w,y,yy,th,ae,oe
+%  }
 
-\foreach \l in \alphabet{
-  \input{letters/\l.tex}}
+%\foreach \l in \alphabet{
+%  \input{letters/\l.tex}}
+
+\input{letters}
 
 \restoregeometry
-\pagestyle{basicstyle}
+\pagestyle{plain}
 
 \fi
 
-% ----------------------------------------------------------------- Phonetics -
+% ================================================================ PHONETICS =
+
 \ifinputphon
 
 \cleardoublepage
@@ -153,7 +183,7 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 
 \fi
 
-% -------------------------------------------------------- Morphological keys -
+% =============================================================== MORPHOLOGY =
 
 \ifinputmorpho
 
@@ -189,7 +219,11 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 
 \fi
 
-% ------------------------------------------------- Photographs authors index -
+% ============================================================== BACK MATTER =
+
+\ifmakebackmatter
+
+% ------------------------------------------------ Photographs authors index -
 
 \cleardoublepage
 %\pagestyle{empty}
@@ -199,7 +233,7 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 %  {Seznam autorů fotografií a ilustrací}         \label{sec:photo}
 \printindex[figures]
 
-% -------------------------------------------------------------- Bibliography -
+% ------------------------------------------------------------- Bibliography -
 \cleardoublepage
 \twocolumn
 \phantomsection
@@ -213,16 +247,20 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 \chapter{Apendix: Islandská gramatika}
 %\includepdf[pages={1,2,3,4,5,6}]{gram.pdf}
 
-\cleardoublepage\null\clearpage % inside of the cover
-% ------------------------------------------------------------------- Barcode -
+% ------------------------------------------------------------------ Barcode -
+% \EANisbn[SC5b] \EANisbn
+\cleardoublepage\null\clearpage % clear to verso
 \pagenumbering{gobble}
-\vfill
-%\EANisbn[SC5b]
+\vspace*\fill
 \EANisbn[SC3]
-%\EANisbn
 
-% ---------------------------------------------------------------- Back cover -
-\cleardoublepage\null\clearpage % inside of the cover
-\makecover\backcoverimages
+\fi
+
+% --------------------------------------------------------------- Back cover -
+
+\ifmakecovers
+  \cleardoublepage\null\clearpage % inner side of the cover
+  \makecoverwith\backcoverimages
+\fi
 
 \end{document}

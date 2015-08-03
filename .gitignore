@@ -131,16 +131,18 @@ sympy-plots-for-*.tex/
 *.swp
 *.swo
 
-introduction/*
-letters/*
+#introduction/*
+#letters/*
 morpho/*
 phon/*
 
-!introduction/DUMMYFILE
-!letters/DUMMYFILE
+#!introduction/DUMMYFILE
+#!letters/DUMMYFILE
 !morpho/DUMMYFILE
 !phon/DUMMYFILE
 
 !mal-icelandic-min-rules.xdy
 !mal-icelandic-min.xdy
+
+letters.tex
 
