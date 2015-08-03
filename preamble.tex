@@ -107,7 +107,7 @@
 \def\large{\fontsize{ 9.600000pt}{2\baselineskip}\selectfont}
 
 % Two columns layout ruler
-\setlength\columnsep    {\baselineskip}
+\setlength\columnsep    {2\baselineskip}
 \setlength\columnseprule{0.4pt}
 
 \raggedbottom
@@ -179,7 +179,7 @@
   \end{tikzpicture}}
 
 % Draw a baseline grid on every page
-\AddToShipoutPicture{\drawbaselinegrid}
+%\AddToShipoutPicture{\drawbaselinegrid}
 
 
 % ################################################################## METADATA #
@@ -715,10 +715,10 @@ thumb/.style={
 %\def \nobreakseq {\nobreak \hskip 0pt \hbox} %nolinebreak in case like (-s, -)
 
 % rule line
-%\newcommand{\HRule}{\rule{\linewidth}{0.1mm}}
+\newcommand{\HRule}{\rule{\linewidth}{0.1mm}}
 
 % width of pdf found box
-%\newlength\eyja
+\newlength\eyja
 
 %\newcommand\strutsmash[1]{\strut\smash{#1}}
 
