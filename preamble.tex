@@ -179,7 +179,7 @@
   \end{tikzpicture}}
 
 % Draw a baseline grid on every page
-%\AddToShipoutPicture{\drawbaselinegrid}
+\AddToShipoutPicture{\drawbaselinegrid}
 
 
 % ################################################################## METADATA #
@@ -625,7 +625,7 @@ thumb/.style={
   {} {} {\titlerule*[2\baselineskip]{}\contentspage}
 
 \titlecontents {section} [\baselineskip] {} {} {}
-  {\titlerule*[2\baselineskip]{}\contentspage}
+  {\titlerule*[1\baselineskip]{.}\contentspage}
 
 
 % #################################################### ASSORTED CUSTOM MACROS #
@@ -639,8 +639,11 @@ thumb/.style={
 
 \newcommand\blspace[1][1]{\vspace{#1\baselineskip}}
 
-\usepackage{xparse}
 
+
+% ####################################################### DICTIONARY COMMANDS #
+
+\usepackage{xparse}
 
 \newcommand \dicsymFrequent  {\raisebox{-.2ex}{\color{darkgreen}\ding{167}}}
 \newcommand \dicsymSee       {$\shortrightarrow$}
@@ -652,29 +655,43 @@ thumb/.style={
 \newcommand \dicsymPhoto
   {\includegraphics[keepaspectratio,height=0.65em]{photo_icon}}
 
-\newcommand\dicEntry[1][]
-  {\par\hangpara{0.5\baselineskip}{1}%
-   \markboth{#1}{#1}}
-%\ifx\relax#1\relax\markboth{#2}{#2}\else\markboth{#1}{#1}\fi%
 
-\newcommand\dicSubEntry{\\\hspace*{-\hangindent}}
+\NewDocumentCommand\dicEntry{o}
+  {\par\hangpara{0.5\baselineskip}{1}%
+   \IfValueT{#1}{\markboth{#1}{#1}}%
+   \ignorespaces}
+
+\newcommand\dicSubEntry
+  {\\\hspace*{-\hangindent}}
 
 \NewDocumentCommand\dicTerm{mo}
-  {{\phvfamily\bfseries\textIS{#1}}\IfValueT{#2}{, \phvfamily\bfseries\textIS{#2}}}
-
-\newcommand\dicTermList[1]
-  {\foreach \t [count=\n] in {#1}{\ifnum\n=1\else, \fi\dicTerm{\t}}}
+  {{\phvfamily\bfseries\textIS{#1}}%
+   \IfValueT{#2}{, {\phvfamily\bfseries\textIS{#2}}}}
 
 \def\dicIPA#1{\textipa{[#1]}}
 
 \NewDocumentCommand\dicPos{smo}
-  {{\color{darkgreen}\small{\bfseries#1}\IfValueT{#2}{\textsubscript{#2}}}}
+  {\mbox{\color{darkgreen}\small{\bfseries#2}\IfValueT{#3}{\textsubscript{#3}}}}
 
 \NewDocumentCommand\dicFlx{smo}
-  {{\color{darkgreen}\footnotesize#1\IfValueT{#2}{\textsubscript{#2}}}}
+  {\mbox{\color{darkgreen}\footnotesize#2\IfValueT{#3}{\textsubscript{#3}}}}
 
-\newcommand\dicExampleCS[1]{\dicsymExampleCS~\textit{#1}}
-\newcommand\dicExampleIS[1]{\dicsymExampleIS~\textIS{\textit{#1}}}
+%\newcommand\dicEntry[1][]
+%  {\par\hangpara{0.5\baselineskip}{1}%
+%   \markboth{#1}{#1}}
+%\ifx\relax#1\relax\markboth{#2}{#2}\else\markboth{#1}{#1}\fi%
+
+
+
+%\newcommand\dicTermList[1]
+%  {\foreach \t [count=\n] in {#1}{\ifnum\n=1\else, \fi\dicTerm{\t}}}
+
+
+
+\newcommand\dicExampleCS[1]
+  {\dicsymExampleCS~\textit{#1}}
+\newcommand\dicExampleIS[1]
+  {\dicsymExampleIS~\textIS{\textit{#1}}}
 \NewDocumentCommand\dicLink{sm}
   {\IfBooleanF#1{\dicsymSee~}\dicTerm{#2}}
 \NewDocumentCommand\dicSynonym{sm}
@@ -780,7 +797,7 @@ thumb/.style={
  \vspace*{1em}                        % I think this is necessary
  \begin{figure}[ht]\centering%
    \setlength\fboxsep{0pt}\setlength\fboxrule{0.5pt}%
-   \foreach \file in \frontcoverimages{
+   \foreach \file in {#1}{
      \fbox{\includegraphics[width=5.5cm]{\file}}}
  \end{figure}
  \vspace*{\fill}

@@ -2,10 +2,10 @@
 
 \input{preamble}
 
-\newif\ifmakecovers        \makecoverstrue
+\newif\ifmakecovers        \makecoversfalse
 \newif\ifmakefrontmatter   \makefrontmattertrue
-\newif\ifinputintroduction \inputintroductionfalse
-\newif\ifinputletters      \inputlettersfalse
+\newif\ifinputintroduction \inputintroductiontrue
+\newif\ifinputletters      \inputletterstrue
 \newif\ifinputphon         \inputphonfalse
 \newif\ifinputmorpho       \inputmorphofalse
 \newif\ifmakebackmatter    \makebackmattertrue
@@ -69,9 +69,8 @@ Slovenské republice a na Islandu poskytl:\\
   \\[36\baselineskip]
 \textbf{Hvalur.org - \the\year}\\
 Licence: \textbf{GNU Free Documentation License}\\
-Sazba: % \textbf{Paolo al-Imk\=an\=\i\ Brasolin}
-  \textbf\LaTeX\ za cenné asistance uživatelů
-  \textbf{\TeX\ - \LaTeX\ Stack Exchange}\\[\baselineskip]
+Sazba: \textbf{Paolo al-Imk\=an\=\i\ Brasolin} v prostředí  \textbf\LaTeX\\
+  Zvláštní poděkování patří uživatelům  \textbf{\TeX\ - \LaTeX\ Stack Exchange}\\[\baselineskip]
 \textbf\ISBN\\[\baselineskip]
 Design pevné vazby: \textbf{Dorota Nierychlewska-Chejn, Jiřina Chejnová}\\
 Tisk: \textbf{Tiskárna Melmen, Pardubice}\\
@@ -83,13 +82,13 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 
 \cleardoublepage
 
+\pagenumbering{arabic}
+
 \pdfbookmark\contentsname{toc}    
 
 \tableofcontents
 
 \fi
-
-\pagenumbering{arabic}
 
 % ============================================================= INTRODUCTION =
 
@@ -242,7 +241,6 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 \printbibliography
 
 \onecolumn
-\pagestyle{empty}
 
 \chapter{Apendix: Islandská gramatika}
 %\includepdf[pages={1,2,3,4,5,6}]{gram.pdf}
