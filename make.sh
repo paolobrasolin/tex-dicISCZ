@@ -1,5 +1,5 @@
 # First run to generate the index file and mal/style
-#pdflatex main
+pdflatex main
 
 # First we convert the *.idx encoding to UTF8
 texlua iec2utf.lua < figures.idx | \
@@ -7,9 +7,9 @@ texlua iec2utf.lua < figures.idx | \
 # then we pipe the result to xindy that sets it with our modules
 
 # Standard bibliography compilation
-#biber main
+biber main
 
 # Finishing runs
-#pdflatex main
-#pdflatex main
+pdflatex main
+pdflatex main
 
