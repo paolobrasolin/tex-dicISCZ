@@ -660,7 +660,7 @@ thumb/.style={
 \newcommand\dicSubEntry{\\\hspace*{-\hangindent}}
 
 \NewDocumentCommand\dicTerm{mo}
-  {{\phvfamily\bfseries\textIS{#1}}\IfValueT#2{\phvfamily\bfseries\textIS{#2}}}
+  {{\phvfamily\bfseries\textIS{#1}}\IfValueT#2{, \phvfamily\bfseries\textIS{#2}}}
 
 \newcommand\dicTermList[1]
   {\foreach \t [count=\n] in {#1}{\ifnum\n=1\else, \fi\dicTerm{\t}}}
