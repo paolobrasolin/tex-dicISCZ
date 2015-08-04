@@ -660,7 +660,7 @@ thumb/.style={
 \newcommand\dicSubEntry{\\\hspace*{-\hangindent}}
 
 \NewDocumentCommand\dicTerm{mo}
-  {{\phvfamily\bfseries\textIS{#1}}\IfValueT#2{, \phvfamily\bfseries\textIS{#2}}}
+  {{\phvfamily\bfseries\textIS{#1}}\IfValueT{#2}{, \phvfamily\bfseries\textIS{#2}}}
 
 \newcommand\dicTermList[1]
   {\foreach \t [count=\n] in {#1}{\ifnum\n=1\else, \fi\dicTerm{\t}}}
@@ -668,10 +668,10 @@ thumb/.style={
 \def\dicIPA#1{\textipa{[#1]}}
 
 \NewDocumentCommand\dicPos{smo}
-  {{\color{darkgreen}\small{\bfseries#1}\IfValueT#2{\textsubscript{#2}}}}
+  {{\color{darkgreen}\small{\bfseries#1}\IfValueT{#2}{\textsubscript{#2}}}}
 
 \NewDocumentCommand\dicFlx{smo}
-  {{\color{darkgreen}\footnotesize#1\IfValueT#2{\textsubscript{#2}}}}
+  {{\color{darkgreen}\footnotesize#1\IfValueT{#2}{\textsubscript{#2}}}}
 
 \newcommand\dicExampleCS[1]{\dicsymExampleCS~\textit{#1}}
 \newcommand\dicExampleIS[1]{\dicsymExampleIS~\textIS{\textit{#1}}}
