@@ -3,8 +3,8 @@
 \input{preamble}
 
 \newif\ifmakecovers        \makecoverstrue
-\newif\ifmakefrontmatter   \makefrontmatterfalse
-\newif\ifinputintroduction \inputintroductiontrue
+\newif\ifmakefrontmatter   \makefrontmattertrue
+\newif\ifinputintroduction \inputintroductionfalse
 \newif\ifinputletters      \inputlettersfalse
 \newif\ifinputphon         \inputphonfalse
 \newif\ifinputmorpho       \inputmorphofalse
@@ -14,7 +14,6 @@
 % ################################################################# DOCUMENT #
 
 \begin{document}
-
 \pagenumbering{gobble}
 
 % -------------------------------------------------------------- Front cover -
@@ -31,6 +30,7 @@
 
 \cleardoublepage
 
+\dicLetter{b}
 \begin{center}
   %\vspace*{2cm}{\fontsize{20}{20}\selectfont\scshape\dictnameCZ\\\dictnameIS}
   \vspace*{\stretch 1}
@@ -66,7 +66,7 @@ Poděkování:\\
 Finanční příspěvek na výtisk exemplářů určených knihovnám\\ v České republice,
 Slovenské republice a na Islandu poskytl:\\
   \textbf{Petr Mikeš, Dorota Nierychlewska-Chejn, Jiřina Chejnová, Otta Chejn}
-\vspace{36\baselineskip}
+  \\[36\baselineskip]
 \textbf{Hvalur.org - \the\year}\\
 Licence: \textbf{GNU Free Documentation License}\\
 Sazba: % \textbf{Paolo al-Imk\=an\=\i\ Brasolin}

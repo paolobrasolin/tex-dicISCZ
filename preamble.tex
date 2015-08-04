@@ -667,11 +667,11 @@ thumb/.style={
 
 \def\dicIPA#1{\textipa{[#1]}}
 
-\NewDocumentCommand\dicPos{mO{}}
-  {{\color{darkgreen}\small{\bfseries#1}\textsubscript{#2}}}
+\NewDocumentCommand\dicPos{smo}
+  {{\color{darkgreen}\small{\bfseries#1}\IfValueT#2{\textsubscript{#2}}}}
 
-\NewDocumentCommand\dicFlx{mO{}}
-  {{\color{darkgreen}\footnotesize#1\textsubscript{#2}}}
+\NewDocumentCommand\dicFlx{smo}
+  {{\color{darkgreen}\footnotesize#1\IfValueT#2{\textsubscript{#2}}}}
 
 \newcommand\dicExampleCS[1]{\dicsymExampleCS~\textit{#1}}
 \newcommand\dicExampleIS[1]{\dicsymExampleIS~\textIS{\textit{#1}}}
@@ -683,15 +683,21 @@ thumb/.style={
   {(\IfBooleanF#1{\dicsymCompare~}\textIS{\textit{#2}})}
 \NewDocumentCommand\dicCompare{sm}
   {(\IfBooleanF#1{\dicsymCompare~}\textIS{\textit{#2}})}
+
+\newcommand\dicPhraseIS[1]{\textIS{\bfseries#1}}
 \newcommand\dicIdiom[2]
-  {\dicSubEntry{\color{newdev}\dicTerm{#1}} \dicsymIdiom\ \dicTerm{#2}}
+  {\dicSubEntry{\color{newdev}\dicTerm{#1}} \dicsymIdiom\ \dicPhraseIS{#2}}
 \newcommand\dicProverb[1]
   {\dicSubEntry\dicsymProverb\ \dicTerm{#1}}
 
 
 
+\newcommand\dicLangCat[1]{{\footnotesize#1}}
+\newcommand\dicFieldCat[1]{{\footnotesize#1}}
 
 
+\newcommand\dicDirectTranslationCS[1]{#1}
+\newcommand\dicIndirectTranslationCS[1]{{\footnotesize#1}}
 
 
 %\newcommand\entry[3][]
@@ -704,10 +710,13 @@ thumb/.style={
 %  {\hspace*{-\hangindent}%
 %   \textIS{\color{newdev}{\phvfamily #1}}}
 %
-%\newcommand*{\dictchar}[1]
-%  {\noindent\parbox[t][9\baselineskip][c]{\columnwidth}
-%     {\centering\HUGE#1\par\xdef\tpd{\the\prevdepth}}\par\prevdepth\tpd}
-%
+\newcommand*{\dicLetter}[1]
+  {\noindent\parbox[t][9\baselineskip][c]{\columnwidth}
+     {\phantomsection\pdfbookmark[1]{#1}{#1}%
+      \centering\HUGE%
+      \MakeUppercase{#1}~\MakeLowercase{#1}%
+      \par\xdef\tpd{\the\prevdepth}}\par\prevdepth\tpd%
+      \expandafter\lettergroup{\MakeLowercase{#1}}}
   
 %tabulky
 \newcommand{\specialcell}[2][l]{%
