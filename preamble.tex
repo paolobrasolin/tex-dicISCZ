@@ -678,7 +678,10 @@ thumb/.style={
   {\IfBooleanF#1{\dicsymSee~}\dicTerm{#2}}
 \NewDocumentCommand\dicSynonym{sm}
   {(\IfBooleanF#1{\dicsymSee~}\textIS{\textit{#2}})}
-\newcommand\dicCompare[1]{(\dicSymCompare~\textIS{\textit{#1}})}
+\NewDocumentCommand\dicAntonym{sm}
+  {(\IfBooleanF#1{\dicsymCompare~}\textIS{\textit{#2}})}
+\NewDocumentCommand\dicCompare{sm}
+  {(\IfBooleanF#1{\dicsymCompare~}\textIS{\textit{#2}})}
 \newcommand\dicIdiom[2]
   {\dicSubEntry{\color{newdev}\dicTerm{#1}} \dicsymIdiom\ \dicTerm{#2}}
 \newcommand\dicProverb[1]
