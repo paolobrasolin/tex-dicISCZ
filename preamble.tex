@@ -659,7 +659,8 @@ thumb/.style={
 
 \newcommand\dicSubEntry{\\\hspace*{-\hangindent}}
 
-\def\dicTerm#1{{\phvfamily\bfseries\textIS{#1}}}
+\NewDocumentCommand\dicTerm{mo}
+  {{\phvfamily\bfseries\textIS{#1}}\IfValueT#2{\phvfamily\bfseries\textIS{#2}}}
 
 \newcommand\dicTermList[1]
   {\foreach \t [count=\n] in {#1}{\ifnum\n=1\else, \fi\dicTerm{\t}}}
@@ -674,7 +675,7 @@ thumb/.style={
 
 \newcommand\dicExampleCS[1]{\dicsymExampleCS~\textit{#1}}
 \newcommand\dicExampleIS[1]{\dicsymExampleIS~\textIS{\textit{#1}}}
-\NewDocumentCommand\dicVariant{sm}
+\NewDocumentCommand\dicLink{sm}
   {\IfBooleanF#1{\dicsymSee~}\dicTerm{#2}}
 \NewDocumentCommand\dicSynonym{sm}
   {(\IfBooleanF#1{\dicsymSee~}\textIS{\textit{#2}})}
