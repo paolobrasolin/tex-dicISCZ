@@ -727,9 +727,9 @@ thumb/.style={
 %  {\hspace*{-\hangindent}%
 %   \textIS{\color{newdev}{\phvfamily #1}}}
 %
-\newcommand*{\dicLetter}[1]
+\newcommand*{\dicLetter}[2]
   {\noindent\parbox[t][9\baselineskip][c]{\columnwidth}
-     {\phantomsection\pdfbookmark[1]{#1}{#1}%
+     {\phantomsection\pdfbookmark[1]{#1}{#2}%
       \centering\HUGE%
       \MakeUppercase{#1}~\MakeLowercase{#1}%
       \par\xdef\tpd{\the\prevdepth}}\par\prevdepth\tpd%
@@ -797,7 +797,7 @@ thumb/.style={
  \vspace*{1em}                        % I think this is necessary
  \begin{figure}[ht]\centering%
    \setlength\fboxsep{0pt}\setlength\fboxrule{0.5pt}%
-   \foreach \file in {#1}{
+   \foreach \file in #1{
      \fbox{\includegraphics[width=5.5cm]{\file}}}
  \end{figure}
  \vspace*{\fill}
