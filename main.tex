@@ -9,7 +9,7 @@
 \newif\ifinputphon         \inputphonfalse
 \newif\ifinputmorpho       \inputmorphofalse
 \newif\ifmakebackmatter    \makebackmattertrue
-
+\newif\ifmakeapendix       \makeapendixtrue
 
 % ################################################################# DOCUMENT #
 
@@ -132,7 +132,7 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 \end{description}
 \end{multicols}
 
-% ---------------------------------------------------- Not sure what this is -
+% ------------------------------------------- The Alphabet / the Headword part
 
 \chapter{Heslová část}
 \clearpage
@@ -248,10 +248,12 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 \nocite{*}
 \printbibliography
 
+% ------------------------------------------------------------------ Apendix -
 \onecolumn
-
+\ifmakeapendix
 \chapter{Apendix: Islandská gramatika}
-%\includepdf[pages={1,2,3,4,5,6}]{gram.pdf}
+\includepdf[pages={1,2,3,4,5,6}]{gram.pdf}
+\fi
 
 % ------------------------------------------------------------------ Barcode -
 % \EANisbn[SC5b] \EANisbn
