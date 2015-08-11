@@ -1,3 +1,10 @@
+# Vlna - to add unbreakable spaces in front of the one syllable Czech prepositions
+# http://ftp.linux.cz/pub/tex/local/cstug/olsak/vlna/
+vlna -l -m -n introduction/uvod.tex
+vlna -l -m -n introduction/historie.tex
+vlna -l -m -n introduction/instructions.tex
+vlna -l -m -n letters.tex
+
 # First run to generate the index file and mal/style
 pdflatex main
 

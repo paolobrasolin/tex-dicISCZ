@@ -63,6 +63,9 @@
 % Icelandic uppercase letters with diacritics: ÁÉÍÓÚÝ (ÐÞÆ) and
 % ------------------ THAT WAS EVIL AND SHOULD NEVER BE DONE ------------------
 
+\newcommand*{\nobreakhyphen}{\mbox{-}}
+\DeclareUnicodeCharacter{2011}{\nobreakhyphen}
+
 % ########################################################### FONTS, SYMBOLS #
 
 \usepackage[T1]{fontenc}
@@ -671,10 +674,18 @@ thumb/.style={
 \def\dicIPA#1{\textipa{[#1]}}
 
 \NewDocumentCommand\dicPos{smo}
-  {\mbox{\color{darkgreen}\small{\bfseries#2}\IfValueT{#3}{\textsubscript{#3}}}}
+  {{%
+%\mbox{
+\color{darkgreen}\small{\bfseries#2}\IfValueT{#3}{\nobreak\textsubscript{#3}}
+%}
+}}
 
 \NewDocumentCommand\dicFlx{smo}
-  {\mbox{\color{darkgreen}\footnotesize#2\IfValueT{#3}{\textsubscript{#3}}}}
+  {{%
+%\mbox{
+\color{darkgreen}\footnotesize#2\IfValueT{#3}{\nobreak\textsubscript{#3}}
+%}
+}}
 
 %\newcommand\dicEntry[1][]
 %  {\par\hangpara{0.5\baselineskip}{1}%
@@ -702,8 +713,9 @@ thumb/.style={
   {(\IfBooleanF#1{\dicsymCompare~}\textIS{\textit{#2}})}
 
 \newcommand\dicPhraseIS[1]{\textIS{\bfseries#1}}
-\newcommand\dicIdiom[2]
-  {\dicSubEntry{\color{newdev}\dicTerm{#1}} \dicsymIdiom\ \dicPhraseIS{#2}}
+\NewDocumentCommand\dicIdiom{mo}
+  {\dicSubEntry{\color{newdev}\dicTerm{#1} %
+     \IfValueTF{#2}{+ \dicTerm{#2} \markboth{#1 + #2}{#1 + #2}}{\markboth{#1}{#1}}}\dicsymIdiom}
 \newcommand\dicProverb[1]
   {\dicSubEntry\dicsymProverb\ \dicTerm{#1}}
 
@@ -728,7 +740,7 @@ thumb/.style={
 %   \textIS{\color{newdev}{\phvfamily #1}}}
 %
 \newcommand*{\dicLetter}[2]
-  {\noindent\parbox[t][9\baselineskip][c]{\columnwidth}
+  {\par\noindent\parbox[t][9\baselineskip][c]{\columnwidth}
      {\phantomsection\pdfbookmark[1]{#1}{#2}%
       \centering\HUGE%
       \MakeUppercase{#1}~\MakeLowercase{#1}%
@@ -841,6 +853,5 @@ thumb/.style={
   , linkcolor=black}
 
 
-
-
+%\hyphenation{e-að e-ð e-ir e-ja e-jum e-m e-n e-r e-rra e-rs e-s e-u}
 
