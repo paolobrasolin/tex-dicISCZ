@@ -1,4 +1,4 @@
-% ########################################################### DOCUMENT CLASS #
+% ############################################################ DOCUMENT CLASS #
 
 \documentclass[ %draft
               , demo  % black boxes instead of figures
@@ -8,7 +8,7 @@
 %\documentclass[ 8pt, B5paper, twoside, openright]{extbook} 
 
 
-% ########################################################## PAGE GEOMETRIES #
+% ########################################################### PAGE GEOMETRIES #
 
 \usepackage%[showframe]
            {geometry}
@@ -34,69 +34,70 @@
   , twocolumn
   }}
 
-% ###################################################### LANGUAGES, ENCODING #
+% ################################################################# LANGUAGES #
 
 \usepackage[icelandic, latin, czech]{babel}
 \usepackage{csquotes}
 
-\usepackage[utf8]{inputenc}
-\DeclareUnicodeCharacter{00A0}{~} % finds hidden non-breakable space
 
+% ################################################################## ENCODING #
+
+\usepackage[utf8]{inputenc}
+
+% Smashing uppercase letters with diacritics
 % ------------------ THIS IS EVIL AND SHOULD NEVER BE DONE -------------------
-% Czech uppercase letters with diacritics:
-\DeclareUnicodeCharacter{00C1}{\strut\smash{\' A}} % Á
-\DeclareUnicodeCharacter{010C}{\strut\smash{\v C}} % Č
-\DeclareUnicodeCharacter{010E}{\strut\smash{\v D}} % Ď
-\DeclareUnicodeCharacter{00C9}{\strut\smash{\' E}} % É
-\DeclareUnicodeCharacter{011A}{\strut\smash{\v E}} % Ě
-\DeclareUnicodeCharacter{00CD}{\strut\smash{\' I}} % Í
-\DeclareUnicodeCharacter{0147}{\strut\smash{\v N}} % Ň
-\DeclareUnicodeCharacter{00D3}{\strut\smash{\' O}} % Ó
-\DeclareUnicodeCharacter{0158}{\strut\smash{\v R}} % Ř
-\DeclareUnicodeCharacter{0160}{\strut\smash{\v S}} % Š
-\DeclareUnicodeCharacter{0164}{\strut\smash{\v T}} % Ť
-\DeclareUnicodeCharacter{00DA}{\strut\smash{\' U}} % Ú
-\DeclareUnicodeCharacter{016E}{\strut\smash{\r U}} % Ů
-\DeclareUnicodeCharacter{00DD}{\strut\smash{\' Y}} % Ý
-\DeclareUnicodeCharacter{017D}{\strut\smash{\v Z}} % Ž
-\DeclareUnicodeCharacter{00D6}{\strut\smash{\" O}} % Ö
-% Icelandic uppercase letters with diacritics: ÁÉÍÓÚÝ (ÐÞÆ) and
+% Don't smash anything if we are on the first run to produce the index
+\IfFileExists{figures.idx}{
+  % Czech uppercase letters with diacritics:
+  \DeclareUnicodeCharacter{00C1}{\strut\smash{\' A}} % Á
+  \DeclareUnicodeCharacter{010C}{\strut\smash{\v C}} % Č
+  \DeclareUnicodeCharacter{010E}{\strut\smash{\v D}} % Ď
+  \DeclareUnicodeCharacter{00C9}{\strut\smash{\' E}} % É
+  \DeclareUnicodeCharacter{011A}{\strut\smash{\v E}} % Ě
+  \DeclareUnicodeCharacter{00CD}{\strut\smash{\' I}} % Í
+  \DeclareUnicodeCharacter{0147}{\strut\smash{\v N}} % Ň
+  \DeclareUnicodeCharacter{00D3}{\strut\smash{\' O}} % Ó
+  \DeclareUnicodeCharacter{0158}{\strut\smash{\v R}} % Ř
+  \DeclareUnicodeCharacter{0160}{\strut\smash{\v S}} % Š
+  \DeclareUnicodeCharacter{0164}{\strut\smash{\v T}} % Ť
+  \DeclareUnicodeCharacter{00DA}{\strut\smash{\' U}} % Ú
+  \DeclareUnicodeCharacter{016E}{\strut\smash{\r U}} % Ů
+  \DeclareUnicodeCharacter{00DD}{\strut\smash{\' Y}} % Ý
+  \DeclareUnicodeCharacter{017D}{\strut\smash{\v Z}} % Ž
+  % Icelandic uppercase letters with diacritics: ÁÉÍÓÚÝ (ÐÞÆ) and
+  \DeclareUnicodeCharacter{00D6}{\strut\smash{\" O}} % Ö
+}{}
 % ------------------ THAT WAS EVIL AND SHOULD NEVER BE DONE ------------------
 
+% Non-breakable space
+\DeclareUnicodeCharacter{00A0}{~}
+
+% Non-breakable hyphen
 \newcommand*{\nobreakhyphen}{\mbox{-}}
 \DeclareUnicodeCharacter{2011}{\nobreakhyphen}
 
-% ########################################################### FONTS, SYMBOLS #
+
+% ############################################################ FONTS, SYMBOLS #
 
 \usepackage[T1]{fontenc}
 
 \usepackage{tgpagella}
 
+\usepackage[scaled=0.88]{helvet} % ss
+\def\phvfamily{\fontfamily{phv}\selectfont}
+
 %\usepackage{stmaryrd}
-% Let's keep this minimal:
+% Let's keep this minimal instead of using the package:
 \DeclareSymbolFont{stmry}{U}{stmry}{m}{n}
 %\SetSymbolFont{stmry}{bold}{U}{stmry}{b}{n}
 \DeclareMathSymbol\shortrightarrow\mathrel{stmry}{"01}
 \DeclareMathSymbol\shortuparrow\mathrel{stmry}{"02}
 
-
-% These seem unused
 \usepackage{dingbat}
 \usepackage{manfnt}
 \usepackage{latexsym}
 
 \usepackage{pifont}
-
-\usepackage[scaled=0.88]{helvet} % ss
-\def\phvfamily{\fontfamily{phv}\selectfont}
-
-
-
-
-
-
-
-
 
 
 % #################################################################### LAYOUT #
@@ -187,12 +188,13 @@
 
 % ################################################################## METADATA #
 
+% This is not actually being used. ------------------------------------------ !
 \title{%
   \textbf{Islandsko-český studijní slovník}%
   \thanks{Tato kniha byla vytvořena v \LaTeX{}u pod Ubuntu 14.04.%
     Poděkování patří všem autorům, kteří publikují pod svobodnými licencemi.}}
 \author{Aleš Chejn, Ján Zaťko, Jón Gíslason}
-\date{říjen 2011}
+%\date{říjen 2011}
 
 
 % ############################################################## BIBLIOGRAPHY #
@@ -205,7 +207,7 @@
 
 \usepackage{imakeidx}
 
-% index of authors of photographs
+% Index of authors of photographs
 \makeindex
   [ name = figures
   , title = {Seznam autorů fotografií a ilustrací}
@@ -217,7 +219,7 @@
 
 % icelandic rules start
 \usepackage{filecontents}
-\def\mygroup#1{\textbf{#1}}
+\def\mygroup#1{{\bfseries#1}}
 \begin{filecontents*}{style.xdy}
 ;; style.xdy
 (markup-letter-group :open-head "~n\mygroup{" :close-head "}")
@@ -314,20 +316,7 @@
 \usepackage{longtable}
 \usepackage{ltxtable}
 
-
-%\LetLtxMacro\oldtabularx\tabularx
-%\LetLtxMacro\oldendtabularx\endtabularx
-%\renewenvironment{tabularx}[1]
-%  {\oldtabularx{\columnwidth}{#2}}
-%  {\oldendtabularx}
-
 \newcommand\LTXfw[1]{\LTXtable{\columnwidth}{#1}}
-
-%%% \LetLtxMacro\oldtabularx\tabularx
-%%% \LetLtxMacro\oldendtabularx\endtabularx
-%%% \newenvironment{longtabularx}[2]
-%%%   {\oldtabularx{#1}{#2}}
-%%%   {\oldendtabularx}
 
 % ------------------------------------------------- I HAVE NO CLUE WHAT THIS IS
 \begingroup
@@ -357,27 +346,12 @@
 \setlength \lightrulewidth {0.06\baselineskip}
 \setlength \belowrulesep   {0.47\baselineskip}
 
-%\usepackage{letltxmacro}
-
-%%% \LetLtxMacro\oldtabular\tabular
-%%% \LetLtxMacro\oldendtabular\endtabular
-%%% \renewenvironment{tabular}[2][t]
-%%%   {\oldtabular[#1]{#2}}
-%%%   {\oldendtabular}
-
-%%% \LetLtxMacro\oldtable\table
-%%% \LetLtxMacro\oldendtable\endtable
-%%% \renewenvironment{table}[1][h]
-%%%   {\leavevmode\oldtable[#1]\vspace{\dp\strutbox}}
-%%%   {\vspace{-\dp\strutbox}\oldendtable}
-%%%   % This aligns a [t] aligned tab-envo to baseline grid
-
-
 %%% % declention and conjugation tables
 %%% \usepackage{floatrow}
 %%% \DeclareFloatFont{footnotesize}{\footnotesize}
 %%% % "scriptsize" is defined by floatrow, "tiny" not
 %%% \floatsetup[table]{font=footnotesize}
+
 
 % ################################################################### FIGURES #
 
@@ -400,7 +374,7 @@
   \setlength\dicfigheight {\heightof\dicfigbox+\fboxrule}
   \setlength\dicfigskip
     {\baselineskip*\numexpr1+\dicfigheight/\baselineskip\relax-\dicfigheight}
-  \begin{figure}[ht]
+  \begin{figure}[hbtp]
     \centering\vspace*{\dicfigskip}\dicfigbox\caption{#2}\index[figures]{#3}
   \end{figure}
 }
@@ -477,26 +451,59 @@
 \definecolor {darkgreen_real}     {rgb} {0.00, 0.50, 0.00}
 
 
+
+
+\definecolor{c1} {HTML}{DD0000}
+\definecolor{c2} {HTML}{DD1400}
+\definecolor{c3} {HTML}{DD2800}
+\definecolor{c4} {HTML}{DD3C00}
+\definecolor{c5} {HTML}{DD5000}
+\definecolor{c6} {HTML}{DD6400}
+\definecolor{c7} {HTML}{DD7800}
+\definecolor{c8} {HTML}{DD8C00}
+\definecolor{c9} {HTML}{DDA000}
+\definecolor{c10}{HTML}{DDB400}
+\definecolor{c11}{HTML}{DDC800}
+\definecolor{c12}{HTML}{DDDD00}
+\definecolor{c13}{HTML}{C8DD00}
+\definecolor{c14}{HTML}{B4DD00}
+\definecolor{c15}{HTML}{A0DD00}
+\definecolor{c16}{HTML}{8CDD00}
+\definecolor{c17}{HTML}{78DD00}
+\definecolor{c18}{HTML}{64DD00}
+\definecolor{c19}{HTML}{50DD00}
+\definecolor{c20}{HTML}{3CDD00}
+\definecolor{c21}{HTML}{28DD00}
+\definecolor{c22}{HTML}{14DD00}
+\definecolor{c23}{HTML}{00DD00}
+\definecolor{c24}{HTML}{00DD14}
+\definecolor{c25}{HTML}{00DD28}
+\definecolor{c26}{HTML}{00DD3C}
+\definecolor{c27}{HTML}{00DD50}
+\definecolor{c28}{HTML}{00DD64}
+\definecolor{c29}{HTML}{00DD78}
+\definecolor{c30}{HTML}{00DD8C}
+\definecolor{c31}{HTML}{00DDA0}
+\definecolor{c32}{HTML}{00DDB4}
+\definecolor{c33}{HTML}{00DDC8}
+\definecolor{c34}{HTML}{00DDDD}
+
+
+
+
+
+
 % ############################################################# THUMB INDEXES #
 
-% Thumb indexes' colors
-%\newcommand\BoxColor{%
-%  \ifcase\theletternum darkgreen!30\or babyblueeyes\or unitednationsblue\or blue(ryb)\or screamingreen\or limegreen\or islamicgreen\or upforestgreen\or icterine\or orange(colorwheel)\or orange-red%
-%  \or oucrimsonred\or cottoncandy\or orchid\or vividcerise\or patriarch\or babyblueeyes\or unitednationsblue\or blue(ryb)\or screamingreen\or limegreen\or islamicgreen\or upforestgreen\or icterine\or orange(colorwheel)\or orange-red%
-%  \or oucrimsonred\or cottoncandy\or orchid\or vividcerise\or patriarch\else darkgreen!30\fi}
-  
-% Thumb indexes' colors
-%\newcommand\BoxColor{%
-%  \ifcase\theletternum darkgreen!30\or color1\or color2\or color3\or color4\or color5\or color6\or color7\or color8\or color9\or color10%
-%  \or color11\or color12\or color13\or color14\or color1\or color2\or color3\or color4\or color5\or color6\or color7\or color8\or color9%
-%  \or color10\or color11\or color12\or color13\or color14\or color1\or color2\or color3\or color4\or color5\or color6\else color7\or color8\or color9\or color10\or color11\or color12\fi}
-
-%\def\BoxColor#1{darkgreen!\the\numexpr103-#1-#1-#1\relax!blue}
-
 \newcommand\BoxColor[1]{%
-\ifcase#1 darkgreen!30\or color13\or color14\or color1\or color2\or color3\or color4\or color5\or color6\or color7\or color8\or color9\or color10%
-\or color11\or color12\or color13\or color14\or color1\or color2\or color3\or color4\or color5\or color6\or color7\or color8\or color9%
-\or color10\or color11\or color12\or color13\or color14\or color1\or color2\or color3\or color4\or color5\or color6\else color7\or color8\or color9\or color10\or color11\or color12\fi}
+\ifcase#1\relax
+\or color13\or color14\or color1\or color2\or color3\or color4\or color5%
+\or color6\or color7\or color8\or color9\or color10\or color11\or color12%
+\or color13\or color14\or color1\or color2\or color3\or color4\or color5%
+\or color6\or color7\or color8\or color9\or color10\or color11\or color12%
+\or color13\or color14\or color1\or color2\or color3\or color4\or color5%
+\or color6\else color7\or color8\or color9\or color10\or color11\or color12\fi}
+
 
 % THUMB INDEXES
 % new counter to hold the current number of the letter to determine the vertical position
@@ -506,16 +513,19 @@
 \setcounter{lettersum}{34}
 % some margin settings
 \newlength{\thumbtopmargin}
-\setlength{\thumbtopmargin}{1cm}
+\setlength{\thumbtopmargin}{0cm}
 \newlength{\thumbbottommargin}
 \setlength{\thumbbottommargin}{2.5cm}
 % calculate the box height by dividing the page height
 \newlength{\thumbheight}
-\pgfmathsetlength{\thumbheight}{%
-(\paperheight-\thumbtopmargin-\thumbbottommargin)%
-/%
-\value{lettersum}
-}
+%\pgfmathsetlength{\thumbheight}{%
+%(\paperheight-\thumbtopmargin-\thumbbottommargin)%
+%/%
+%\value{lettersum}
+%}
+
+\setlength\thumbheight{\textheight/34}
+
 % box width
 \newlength{\thumbwidth}
 \setlength{\thumbwidth}{0.5cm}
@@ -548,13 +558,11 @@ thumb/.style={
 }
 
 \newcommand{\drawthumb}[2]{%
-  % see pgfmanual.pdf for more information about this part
   \begin{tikzpicture}[remember picture, overlay]
-    \node [thumb, fill=\BoxColor{#1}, text centered, anchor=north #2]
-       at ($(current page.north #2)-%
-%            (0,\thumbtopmargin+\value{letternum}*\thumbheight)%
-            (0,\thumbtopmargin+#1*\thumbheight)$) {\csname Let#1\endcsname};
-   \end{tikzpicture}}
+    \node [thumb, fill=\BoxColor{#1}, text centered, anchor=south #2]
+       at ($(current page.#2 |- current page text area.north)-%
+              (0,#1*\thumbheight)$) {\csname Let#1\endcsname};
+  \end{tikzpicture}}
 
 % I had to exchange the east/west anchors of the thumbs
 % because they were being drawn flipped. I don't know why.
@@ -621,7 +629,7 @@ thumb/.style={
 %\BeforeBeginEnvironment{multicols}{\vspace{-\dp\strutbox}}
 
 
-% ######################################################### TABLE OF CONTENTS #
+% ######################################################## TABLE OF CONTENTS #
 \usepackage{titletoc}
 
 \titlecontents {chapter} [0pt] {\addvspace\baselineskip\bfseries}
@@ -716,8 +724,8 @@ thumb/.style={
 \NewDocumentCommand\dicIdiom{mo}
   {\dicSubEntry{\color{newdev}\dicTerm{#1} %
      \IfValueTF{#2}{+ \dicTerm{#2} \markboth{#1 + #2}{#1 + #2}}{\markboth{#1}{#1}}}\dicsymIdiom}
-\newcommand\dicProverb[1]
-  {\dicSubEntry\dicsymProverb\ \dicTerm{#1}}
+\newcommand\dicProverb
+  {\dicSubEntry\dicsymProverb}
 
 
 
@@ -739,13 +747,16 @@ thumb/.style={
 %  {\hspace*{-\hangindent}%
 %   \textIS{\color{newdev}{\phvfamily #1}}}
 %
-\newcommand*{\dicLetter}[2]
-  {\par\noindent\parbox[t][9\baselineskip][c]{\columnwidth}
-     {\phantomsection\pdfbookmark[1]{#1}{#2}%
-      \centering\HUGE%
-      \MakeUppercase{#1}~\MakeLowercase{#1}%
-      \par\xdef\tpd{\the\prevdepth}}\par\prevdepth\tpd%
-      \expandafter\lettergroup{\MakeLowercase{#1}}}
+
+\usepackage{placeins}
+
+\newcommand*{\dicLetter}[2]{%
+  \FloatBarrier\newpage\phantomsection\pdfbookmark[1]{#1}{#2}%
+  \noindent\parbox[b][9\baselineskip][c]{\columnwidth}
+    {\centering\HUGE\strut\smash{\MakeUppercase{#1}~\MakeLowercase{#1}}}%
+      %\par\xdef\tpd{\the\prevdepth}
+      %\par\prevdepth\tpd%
+  \expandafter\lettergroup{\MakeUppercase{#1}}}
   
 %tabulky
 \newcommand{\specialcell}[2][l]{%
@@ -764,15 +775,6 @@ thumb/.style={
 % width of pdf found box
 \newlength\eyja
 
-%\newcommand\strutsmash[1]{\strut\smash{#1}}
-
-
-% Dictionary symbols
-
-
-% Command synonyms
-%\let\freqstar\dicsymFrequent
-%\let\photoicon\dicsymPhoto
 
 
 % #################################################################### COVERS #
@@ -830,7 +832,7 @@ thumb/.style={
 
 
 
-% ###################################################### HYPERREF & PDF INFO #
+% ####################################################### HYPERREF & PDF INFO #
 
 % unicode neccessary so that national characters in hypersetup appear ok
 \usepackage[pdftex, unicode, hyperfootnotes=false]{hyperref}
@@ -853,5 +855,4 @@ thumb/.style={
   , linkcolor=black}
 
 
-%\hyphenation{e-að e-ð e-ir e-ja e-jum e-m e-n e-r e-rra e-rs e-s e-u}
 

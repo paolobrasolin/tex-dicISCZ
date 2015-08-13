@@ -4,7 +4,7 @@
 
 \newif\ifmakecovers        \makecoversfalse
 \newif\ifmakefrontmatter   \makefrontmattertrue
-\newif\ifinputintroduction \inputintroductiontrue
+\newif\ifinputintroduction \inputintroductionfalse
 \newif\ifinputletters      \inputletterstrue
 \newif\ifinputphon         \inputphonfalse
 \newif\ifinputmorpho       \inputmorphofalse
@@ -14,7 +14,7 @@
 % ################################################################# DOCUMENT #
 
 \begin{document}
-\pagenumbering{gobble}
+%\pagenumbering{gobble}
 
 % -------------------------------------------------------------- Front cover -
 
@@ -132,12 +132,17 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 \end{description}
 \end{multicols}
 
+\fi
+
 % ------------------------------------------- The Alphabet / the Headword part
 
 \chapter{Heslová část}
-\clearpage
 
-\fi
+
+\foreach \n in {1,...,34}{
+  \drawthumb{\n}{east}}
+
+\clearpage
 
 % =========================================================== THE DICTIONARY =
 
@@ -242,11 +247,13 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 
 % ------------------------------------------------------------- Bibliography -
 \cleardoublepage
-\twocolumn
-\phantomsection
-\addcontentsline{toc}{chapter}{Bibliografie}
-\nocite{*}
-\printbibliography
+\chapter{Bibliografie}
+%\twocolumn
+%\phantomsection
+%\addcontentsline{toc}{chapter}{Bibliografie}
+\begin{multicols}{2}
+\nocite{*}\printbibliography[heading=none]
+\end{multicols}
 
 % ------------------------------------------------------------------ Apendix -
 \onecolumn
