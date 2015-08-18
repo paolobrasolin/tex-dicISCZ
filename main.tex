@@ -1,15 +1,17 @@
 % ############################################### PREAMBLE AND CONTROL PANEL #
 
+\newif\ifdummyfigures      \dummyfigurestrue
+
 \input{preamble}
 
 \newif\ifmakecovers        \makecoversfalse
-\newif\ifmakefrontmatter   \makefrontmattertrue
+\newif\ifmakefrontmatter   \makefrontmatterfalse
 \newif\ifinputintroduction \inputintroductionfalse
 \newif\ifinputletters      \inputletterstrue
 \newif\ifinputphon         \inputphonfalse
 \newif\ifinputmorpho       \inputmorphofalse
-\newif\ifmakebackmatter    \makebackmattertrue
-\newif\ifmakeapendix       \makeapendixtrue
+\newif\ifmakebackmatter    \makebackmatterfalse
+\newif\ifmakeapendix       \makeapendixfalse
 
 % ################################################################# DOCUMENT #
 
@@ -139,8 +141,8 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 \chapter{Heslová část}
 
 
-\foreach \n in {1,...,34}{
-  \drawthumb{\n}{east}}
+\foreach \l [count=\n] in \alphabet{
+  \drawthumb{\n}{east}{\l}}
 
 \clearpage
 

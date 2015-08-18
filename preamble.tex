@@ -1,8 +1,6 @@
 % ############################################################ DOCUMENT CLASS #
 
-\documentclass[ %draft
-              , demo  % black boxes instead of figures
-              , 8pt, c5paper, twoside, openright]{extbook}
+\documentclass[ 8pt, c5paper, twoside, openright]{extbook}
 
 %\documentclass[10pt, a4paper, twoside, openright]{extbook}
 %\documentclass[ 8pt, B5paper, twoside, openright]{extbook} 
@@ -33,6 +31,7 @@
   , bindingoffset = 0cm
   , twocolumn
   }}
+
 
 % ################################################################# LANGUAGES #
 
@@ -82,8 +81,8 @@
 \usepackage[T1]{fontenc}
 
 \usepackage{tgpagella}
+\usepackage[scaled=0.88]{helvet}      % relative scale of the two fonts
 
-\usepackage[scaled=0.88]{helvet} % ss
 \def\phvfamily{\fontfamily{phv}\selectfont}
 
 %\usepackage{stmaryrd}
@@ -93,51 +92,57 @@
 \DeclareMathSymbol\shortrightarrow\mathrel{stmry}{"01}
 \DeclareMathSymbol\shortuparrow\mathrel{stmry}{"02}
 
-\usepackage{dingbat}
-\usepackage{manfnt}
-\usepackage{latexsym}
+% Methinks these are not necessary
+%\usepackage{dingbat}
+%\usepackage{manfnt}
+%\usepackage{latexsym}
 
 \usepackage{pifont}
 
 
 % #################################################################### LAYOUT #
 
-% \normalsize should be {8pt}{9.6pt}
 \def\HUGE {\fontsize{23.887872pt}{3\baselineskip}\selectfont}
 \def\Huge {\fontsize{19.906560pt}{3\baselineskip}\selectfont}
 \def\huge {\fontsize{16.588800pt}{3\baselineskip}\selectfont}
 \def\LARGE{\fontsize{13.824000pt}{2\baselineskip}\selectfont}
 \def\Large{\fontsize{11.520000pt}{2\baselineskip}\selectfont}
 \def\large{\fontsize{ 9.600000pt}{2\baselineskip}\selectfont}
+% \normalsize is {8pt}{9.6pt}
 
-% Two columns layout ruler
+% Two columns layout
 \setlength\columnsep    {2\baselineskip}
 \setlength\columnseprule{0.4pt}
 
+% Necessary for baseline alignment
+\topskip=\baselineskip
 \raggedbottom
-
-\topskip=\baselineskip % Baselines aligned to grid
+\setlength\parskip{0pt} % it's better to avoid glue
 
 % Temporarily suppress warnings
 \hbadness=10000
 \vbadness=10000
 
-\setlength\parskip{0pt}               % better avoid glue
-\setlength\emergencystretch{50pt}     % to temporarily settle overf hboxes
+% This value is ENORMOUS but I can't think of a better non-manual solution.
+% Stil, microtype helps a lot to lower it.
+\setlength\emergencystretch{17pt}
+
 %\renewcommand\baselinestretch{1.0}
 %\setlength\baselineskip{9.6pt}
 
 
 % ######################################################### ASSORTED PACKAGES #
 
+\usepackage[rgb]{xcolor}
+
 \usepackage{tikz}
 \usetikzlibrary{calc}
 
 \usepackage{tipa}                      % IPA phonetics
 
-\usepackage{fourier-orns}              % ornaments
-\usepackage{amsmath}                   % non-breakable dash
-\usepackage{hyphenat}                  % no hyphen in abbreviations
+%\usepackage{fourier-orns}              % ornaments
+%\usepackage{amsmath}                   % non-breakable dash
+%\usepackage{hyphenat}                  % no hyphen in abbreviations
 
 \usepackage{hanging}
 \usepackage{fix2col}
@@ -148,9 +153,9 @@
 
 \usepackage{multirow}
 \usepackage{multicol}
-\usepackage{rotating}
+%\usepackage{rotating}
 
-\usepackage{etoolbox} % http://ctan.org/pkg/etoolbox
+\usepackage{etoolbox}
 
 \usepackage[ISBN=978-80-260-2385-2,SC0]{ean13isbn}
 
@@ -183,17 +188,18 @@
   \end{tikzpicture}}
 
 % Draw a baseline grid on every page
-\AddToShipoutPicture{\drawbaselinegrid}
+%\AddToShipoutPicture{\drawbaselinegrid}
 
 
 % ################################################################## METADATA #
 
 % This is not actually being used. ------------------------------------------ !
-\title{%
-  \textbf{Islandsko-český studijní slovník}%
-  \thanks{Tato kniha byla vytvořena v \LaTeX{}u pod Ubuntu 14.04.%
-    Poděkování patří všem autorům, kteří publikují pod svobodnými licencemi.}}
-\author{Aleš Chejn, Ján Zaťko, Jón Gíslason}
+
+%\title{%
+%  \textbf{Islandsko-český studijní slovník}%
+%  \thanks{Tato kniha byla vytvořena v \LaTeX{}u pod Ubuntu 14.04.%
+%    Poděkování patří všem autorům, kteří publikují pod svobodnými licencemi.}}
+%\author{Aleš Chejn, Ján Zaťko, Jón Gíslason}
 %\date{říjen 2011}
 
 
@@ -226,38 +232,6 @@
 \end{filecontents*}
 % icelandic rules end
 
-
-% ############################################################### PAGE STYLES #
-
-\usepackage{fancyhdr}
-
-% -------------------------------------- BASIC PAGE STYLE
-\fancypagestyle{plain}{
-  \fancyhf\relax                       % Clear header/footer
-  \renewcommand \headrulewidth {0.0pt} % No header rule
-  \renewcommand \footrulewidth {0.0pt} % No footer rule
-  \fancyfoot[C]{\thepage}              % Page number in footer, centred
-}
-
-% -------------------------------------- INDEX PAGE STYLE  
-%\fancypagestyle{indexstyle}{
-%  \fancyhf\relax                       % Clear header/footer
-%  \renewcommand \headrulewidth {0.4pt} % Thin header rule
-%  \renewcommand \footrulewidth {0.0pt} % No footer rule
-%  \fancyhead[C]{\thepage}              % Page number in footer, centred
-%}
-
-% -------------------------------------- DICTIONARY PAGE STYLE
-\fancypagestyle{myheadings}{
-  \fancyhf\relax                       % Clear header/footer
-  \renewcommand \headrulewidth {0.4pt} % Thin header rule
-  \fancyhead[CO,CE]{\thepage}          % Page number in header, centred
-  % NOTE: the page numbers will be printed when the dictionary is ready
-  \fancyhead[LE,LO]{\phvfamily\bfseries\rightmark}
-  \fancyhead[RE,RO]{\phvfamily\bfseries\leftmark}
-}
-
-\pagestyle{plain}  
 
 % ##################################################################### LISTS #
 
@@ -374,61 +348,52 @@
   \setlength\dicfigheight {\heightof\dicfigbox+\fboxrule}
   \setlength\dicfigskip
     {\baselineskip*\numexpr1+\dicfigheight/\baselineskip\relax-\dicfigheight}
-  \begin{figure}[hbtp]
+  \begin{figure}[hbt]
     \centering\vspace*{\dicfigskip}\dicfigbox\caption{#2}\index[figures]{#3}
   \end{figure}
 }
 
+\ifdummyfigures
+  \let\olddicFigure\dictionaryfigure
+  \renewcommand\dictionaryfigure[3]{\olddicFigure{example-image-a}{#2}{#3}}
+\fi
+
 
 % #################################################################### COLORS #
 
-\usepackage{color}
+%\usepackage{color}
 
 % http://www.colorschemer.com/online.html
 % main color - grammar color
 % #66023C
 \definecolor {darkgreen}          {rgb} {0.40, 0.01, 0.24}
 
-\definecolor {royalazure}         {rgb} {0.00, 0.22, 0.66}
-\definecolor {brown}              {rgb} {0.40, 0.01, 0.24}
+%\definecolor {royalazure}         {rgb} {0.00, 0.22, 0.66}
+%\definecolor {brown}              {rgb} {0.40, 0.01, 0.24}
 
 % COLORS FOR THUMB INDEXES
-\definecolor {babyblueeyes}       {rgb} {0.63, 0.79, 0.95}
-\definecolor {unitednationsblue}  {rgb} {0.36, 0.57, 0.90}
-\definecolor {blue(ryb)}          {rgb} {0.01, 0.28, 1.00}
-\definecolor {darkblue}           {rgb} {0.00, 0.00, 0.55}
-\definecolor {screamingreen}      {rgb} {0.46, 1.00, 0.44}
-\definecolor {limegreen}          {rgb} {0.20, 0.80, 0.20}
-\definecolor {islamicgreen}       {rgb} {0.00, 0.56, 0.00}
-\definecolor {upforestgreen}      {rgb} {0.00, 0.27, 0.13}
-\definecolor {icterine}           {rgb} {0.99, 0.97, 0.37}
-\definecolor {orange(colorwheel)} {rgb} {1.00, 0.50, 0.00}
-\definecolor {orange-red}         {rgb} {1.00, 0.27, 0.00}
-\definecolor {oucrimsonred}       {rgb} {0.60, 0.00, 0.00}
-\definecolor {cottoncandy}        {rgb} {1.00, 0.74, 0.85}
-\definecolor {orchid}             {rgb} {0.85, 0.44, 0.84}
-\definecolor {vividcerise}        {rgb} {0.85, 0.11, 0.51}
-\definecolor {patriarch}          {rgb} {0.50, 0.00, 0.50}
+%\definecolor {darkblue}           {rgb}{0.00, 0.00, 0.55} 
+%\definecolor {upforestgreen}      {rgb}{0.00, 0.27, 0.13} 
+%\definecolor {islamicgreen}       {rgb}{0.00, 0.56, 0.00} 
+%\definecolor {blue(ryb)}          {rgb}{0.01, 0.28, 1.00} 
+%\definecolor {limegreen}          {rgb}{0.20, 0.80, 0.20} 
+%\definecolor {unitednationsblue}  {rgb}{0.36, 0.57, 0.90} 
+%\definecolor {screamingreen}      {rgb}{0.46, 1.00, 0.44} 
+%\definecolor {patriarch}          {rgb}{0.50, 0.00, 0.50} 
+%\definecolor {oucrimsonred}       {rgb}{0.60, 0.00, 0.00} 
+%\definecolor {babyblueeyes}       {rgb}{0.63, 0.79, 0.95} 
+%\definecolor {vividcerise}        {rgb}{0.85, 0.11, 0.51} 
+%\definecolor {orchid}             {rgb}{0.85, 0.44, 0.84} 
+%\definecolor {icterine}           {rgb}{0.99, 0.97, 0.37} 
+%\definecolor {orange-red}         {rgb}{1.00, 0.27, 0.00} 
+%\definecolor {orange(colorwheel)} {rgb}{1.00, 0.50, 0.00} 
+%\definecolor {cottoncandy}        {rgb}{1.00, 0.74, 0.85} 
 
 \definecolor {title}              {RGB} {  16,   13,   32}
-\definecolor {golden}             {RGB} { 241,  184,   45}
-\definecolor {freqstar}           {RGB} {  91,    3,   99}
+%\definecolor {golden}             {RGB} { 241,  184,   45}
+%\definecolor {freqstar}           {RGB} {  91,    3,   99}
 \definecolor {newdev}             {RGB} {   3,   11,   99}
 
-\definecolor {color1}             {RGB} { 182,   86,    0}
-\definecolor {color2}             {RGB} { 143,    9,    6}
-\definecolor {color3}             {RGB} {   3,   23,  118}
-\definecolor {color4}             {RGB} {   0,   82,  168}
-\definecolor {color5}             {RGB} {   0,   85,  142}
-\definecolor {color6}             {RGB} {   0,  115,  162}
-\definecolor {color7}             {RGB} {  34,  146,  186}
-\definecolor {color8}             {RGB} {  40,  159,  153}
-\definecolor {color9}             {RGB} {   0,  125,  111}
-\definecolor {color10}            {RGB} {   4,  107,   60}
-\definecolor {color11}            {RGB} {  71,  134,   81}
-\definecolor {color12}            {RGB} { 109,  134,   42}
-\definecolor {color13}            {RGB} { 205,  194,   18}
-\definecolor {color14}            {RGB} { 204,  162,   24}
 
 %\definecolor {color1}             {RGB} { 239,  222,  205}
 %\definecolor {color2}             {RGB} { 251,  206,  177}
@@ -447,46 +412,11 @@
 %\definecolor {color15}            {RGB} { 244,  239,   85}
 %\definecolor {color16}            {RGB} { 245,  239,   57}
 
-\definecolor {lightgrey}          {RGB} { 105,  105,  105}
-\definecolor {darkgreen_real}     {rgb} {0.00, 0.50, 0.00}
+%\definecolor {lightgrey}          {RGB} { 105,  105,  105}
+%\definecolor {darkgreen_real}     {rgb} {0.00, 0.50, 0.00}
 
 
 
-
-\definecolor{c1} {HTML}{DD0000}
-\definecolor{c2} {HTML}{DD1400}
-\definecolor{c3} {HTML}{DD2800}
-\definecolor{c4} {HTML}{DD3C00}
-\definecolor{c5} {HTML}{DD5000}
-\definecolor{c6} {HTML}{DD6400}
-\definecolor{c7} {HTML}{DD7800}
-\definecolor{c8} {HTML}{DD8C00}
-\definecolor{c9} {HTML}{DDA000}
-\definecolor{c10}{HTML}{DDB400}
-\definecolor{c11}{HTML}{DDC800}
-\definecolor{c12}{HTML}{DDDD00}
-\definecolor{c13}{HTML}{C8DD00}
-\definecolor{c14}{HTML}{B4DD00}
-\definecolor{c15}{HTML}{A0DD00}
-\definecolor{c16}{HTML}{8CDD00}
-\definecolor{c17}{HTML}{78DD00}
-\definecolor{c18}{HTML}{64DD00}
-\definecolor{c19}{HTML}{50DD00}
-\definecolor{c20}{HTML}{3CDD00}
-\definecolor{c21}{HTML}{28DD00}
-\definecolor{c22}{HTML}{14DD00}
-\definecolor{c23}{HTML}{00DD00}
-\definecolor{c24}{HTML}{00DD14}
-\definecolor{c25}{HTML}{00DD28}
-\definecolor{c26}{HTML}{00DD3C}
-\definecolor{c27}{HTML}{00DD50}
-\definecolor{c28}{HTML}{00DD64}
-\definecolor{c29}{HTML}{00DD78}
-\definecolor{c30}{HTML}{00DD8C}
-\definecolor{c31}{HTML}{00DDA0}
-\definecolor{c32}{HTML}{00DDB4}
-\definecolor{c33}{HTML}{00DDC8}
-\definecolor{c34}{HTML}{00DDDD}
 
 
 
@@ -495,91 +425,139 @@
 
 % ############################################################# THUMB INDEXES #
 
-\newcommand\BoxColor[1]{%
-\ifcase#1\relax
-\or color13\or color14\or color1\or color2\or color3\or color4\or color5%
-\or color6\or color7\or color8\or color9\or color10\or color11\or color12%
-\or color13\or color14\or color1\or color2\or color3\or color4\or color5%
-\or color6\or color7\or color8\or color9\or color10\or color11\or color12%
-\or color13\or color14\or color1\or color2\or color3\or color4\or color5%
-\or color6\else color7\or color8\or color9\or color10\or color11\or color12\fi}
+\def\alphabet
+  {a,á,b,c,d,e,é,f,g,h,i%
+  ,í,j,k,l,m,n,o,ó,p,r,s%
+  ,t,u,ú,v,w,x,y,ý,þ,æ,ö}
+
+\def\ALPHABET
+  {A,Á,B,C,D,E,É,F,G,H,I%
+  ,Í,J,K,L,M,N,O,Ó,P,R,S%
+  ,T,U,Ú,V,W,X,Y,Ý,Þ,Æ,Ö}
+
+
+%aábcd(ð)eéfghi
+%íjklmnoóp(q)rs
+%tuúvwxyýþæö
+
+\definecolorseries{thumbcolors}{hsb}{grad}[hsb]{0,0.9,0.7}[hsb]{-1,0,0}
+\resetcolorseries[33]{thumbcolors}
+
+
+%\definecolor{color13}{RGB}{ 205,194, 18}  
+%\definecolor{color14}{RGB}{ 204,162, 24}  
+%\definecolor{color1} {RGB}{ 182, 86,  0}  
+%\definecolor{color2} {RGB}{ 143,  9,  6}  
+%\definecolor{color3} {RGB}{   3, 23,118}  
+%\definecolor{color4} {RGB}{   0, 82,168}  
+%\definecolor{color5} {RGB}{   0, 85,142}  
+%\definecolor{color6} {RGB}{   0,115,162}  
+%\definecolor{color7} {RGB}{  34,146,186}  
+%\definecolor{color8} {RGB}{  40,159,153}  
+%\definecolor{color9} {RGB}{   0,125,111}  
+%\definecolor{color10}{RGB}{   4,107, 60}  
+%\definecolor{color11}{RGB}{  71,134, 81}  
+%\definecolor{color12}{RGB}{ 109,134, 42}  
+
+%\newcommand\BoxColor[1]{%
+%\ifcase#1\relax
+%\or color13\or color14\or color1\or color2\or color3\or color4\or color5%
+%\or color6\or color7\or color8\or color9\or color10\or color11\or color12%
+%\else\BoxColor{\the\numexpr#1-14\relax}\fi}
 
 
 % THUMB INDEXES
 % new counter to hold the current number of the letter to determine the vertical position
 \newcounter{letternum}
 % newcounter for the sum of all letters to get the right height of a box
-\newcounter{lettersum}
-\setcounter{lettersum}{34}
+%\newcounter{lettersum}
+%\setcounter{lettersum}{34}
 % some margin settings
-\newlength{\thumbtopmargin}
-\setlength{\thumbtopmargin}{0cm}
-\newlength{\thumbbottommargin}
-\setlength{\thumbbottommargin}{2.5cm}
-% calculate the box height by dividing the page height
-\newlength{\thumbheight}
-%\pgfmathsetlength{\thumbheight}{%
-%(\paperheight-\thumbtopmargin-\thumbbottommargin)%
-%/%
-%\value{lettersum}
-%}
-
-\setlength\thumbheight{\textheight/34}
-
-% box width
-\newlength{\thumbwidth}
-\setlength{\thumbwidth}{0.5cm}
+\newlength\thumbheight \setlength\thumbheight {1.75\baselineskip}
+\newlength\thumbwidth  \setlength\thumbwidth  {0.4\paperwidth-0.4\textwidth}
+\newlength\thumbmargin \setlength\thumbmargin {0.5\paperheight-17\thumbheight}
 % style the boxes
 \tikzset{
-thumb/.style={
-   text=white,
-   minimum height=\thumbheight,
-   text width=\thumbwidth,
-   outer sep=0pt,
-   font=\sffamily\bfseries,
- }
- }
+  thumb/.style={
+    text=white,
+    text centered, 
+    minimum height=\thumbheight,
+    minimum width=\thumbwidth,
+    outer sep=0pt,
+    font=\sffamily\bfseries\large,
+ }}
 
-\def\thumbnew{}
-\def\thumbold{}
 \usepackage{everypage}
-\AddEverypageHook{\if\relax\thumbnew\relax\xdef\thumbnew{\thumbold}\fi}
 
-\def\ethumbs#1,#2\relax{\if\relax#1\relax\else\eventhumb{#1}\fi%
-                        \if\relax#2\relax\else\ethumbs#2\relax\fi%
-                        \gdef\thumbnew{}%
-                        \gdef\thumbold{#1,}%
-}
 
-\def\othumbs#1,#2\relax{\if\relax#1\relax\else\oddthumb{#1}\fi%
-                        \if\relax#2\relax\else\othumbs#2\relax\fi%
-                        \gdef\thumbold{#1,}%
-                        \gdef\thumbnew{}%
-}
+\def\thumblast{}  % Last thumb of preceeding page
+\def\thumbstack{} % Stack holding thumbs pushed on current page
+% At start of page, if there are no new thumbs then use the (last) old one
+\AddEverypageHook{\if\relax\thumbstack\relax\xdef\thumbstack{\thumblast}\fi}
+\def\thumbpush#1{\xdef\thumbstack{#1,\thumbstack}}
 
-\newcommand{\drawthumb}[2]{%
+\newcommand{\drawthumb}[3]{%
   \begin{tikzpicture}[remember picture, overlay]
-    \node [thumb, fill=\BoxColor{#1}, text centered, anchor=south #2]
-       at ($(current page.#2 |- current page text area.north)-%
-              (0,#1*\thumbheight)$) {\csname Let#1\endcsname};
+    \node [thumb, fill={thumbcolors!![#1]}, anchor=south #2]
+       at ($(current page.north #2)-(0,\thumbmargin+#1\thumbheight)$) {#3};
   \end{tikzpicture}}
 
-% I had to exchange the east/west anchors of the thumbs
-% because they were being drawn flipped. I don't know why.
-\newcommand{\oddthumb} [1]{\drawthumb{#1}{west}}
-\newcommand{\eventhumb}[1]{\drawthumb{#1}{east}}
+\newcommand\drawrectothumb[1]{\drawthumb{#1}{east}{\csname Let#1\endcsname}}
+\newcommand\drawversothumb[1]{\drawthumb{#1}{west}{\csname Let#1\endcsname}}
 
-% create a new command to set a new lettergroup with thumb indexes
+\def\dorectothumbs{\expandafter\thumbgobblewith\thumbstack<\drawrectothumb>}
+
+\def\thumbgobblewith#1,#2<#3>{%
+  \if\relax#1\relax\else#3{#1}\fi%
+  \if\relax#2\relax\else\thumbgobblewith#2<#3>\fi%
+  \gdef\thumblast{#1,}%
+  \gdef\thumbstack{}}
+
+%\def\drawrectothumblist#1,#2\relax{%
+%  \if\relax#1\relax\else\drawrectothumb{#1}\fi%
+%  \if\relax#2\relax\else\drawrectothumblist#2\relax\fi%
+%  \gdef\thumblast{#1,}%
+%  \gdef\thumbstack{}}
+%
+%\def\drawversothumblist#1,#2\relax{%
+%  \if\relax#1\relax\else\drawversothumb{#1}\fi%
+%  \if\relax#2\relax\else\drawversothumblist#2\relax\fi%
+%  \gdef\thumblast{#1,}%
+%  \gdef\thumbstack{}}
+
+% Add a thumb to the stack
 \newcommand{\lettergroup}[1]{%
   % step the counter of the letters
   \refstepcounter{letternum}%
   \expandafter\gdef\csname Let\theletternum\endcsname{#1}%
-  \xdef\thumbnew{\theletternum,\thumbnew}%
-  \fancyhead[LO]{\phvfamily\bfseries\rightmark%
-    \expandafter\ethumbs\thumbnew\relax\relax\relax}%
-  \fancyhead[RE]{\phvfamily\bfseries\leftmark%
-    \expandafter\othumbs\thumbnew\relax\relax\relax}%
+  \thumbpush\theletternum
 }
+
+
+% ############################################################### PAGE STYLES #
+
+\usepackage{fancyhdr}
+
+% -------------------------------------- BASIC PAGE STYLE
+\fancypagestyle{plain}{
+  \fancyhf\relax                       % Clear header/footer
+  \renewcommand \headrulewidth {0.0pt} % No header rule
+  \renewcommand \footrulewidth {0.0pt} % No footer rule
+  \fancyfoot[C]{\thepage}              % Page number in footer, centred
+}
+
+% -------------------------------------- DICTIONARY PAGE STYLE
+\fancypagestyle{myheadings}{
+  \fancyhf\relax                       % Clear header/footer
+  \renewcommand \headrulewidth {0.4pt} % Thin header rule
+  %\fancyhead[CO,CE]{\thepage}          % Page number in header, centred
+  \fancyhead[CO]{\thepage\dorectothumbs}
+  \fancyhead[CE]{\thepage\expandafter\thumbgobblewith\thumbstack<\drawversothumb>}
+  \fancyhead[LE,LO]{\phvfamily\bfseries\rightmark}
+  \fancyhead[RE,RO]{\phvfamily\bfseries\leftmark}
+}
+
+\pagestyle{plain}  
 
 
 % ############################################################## LOCALIZATION #
@@ -593,7 +571,7 @@ thumb/.style={
   \renewcommand\contentsname{Obsah}}
 
 \renewcommand \contentsname {Obsah}
-\renewcommand \chaptername  {Kapitola}
+%\renewcommand \chaptername  {Kapitola}
 
 
 % ################################################################ SECTIONING #
@@ -602,7 +580,7 @@ thumb/.style={
 \setlength{\beforetitleunit}{\baselineskip}
 \setlength{\aftertitleunit} {\baselineskip}
 
-\titlespacing*{\chapter}   {0em}{*0}{*3} % Remembere there's a topskip too
+\titlespacing*{\chapter}   {0em}{*0}{*3} % Remember there's a topskip too
 \titlespacing*{\section}   {0em}{*1}{*2}
 \titlespacing*{\subsection}{0em}{*1}{*2}
 
@@ -668,7 +646,7 @@ thumb/.style={
 
 
 \NewDocumentCommand\dicEntry{o}
-  {\par\hangpara{0.5\baselineskip}{1}%
+  {\par\hangpara{0.25\baselineskip}{1}%
    \IfValueT{#1}{\markboth{#1}{#1}}%
    \ignorespaces}
 
@@ -855,4 +833,4 @@ thumb/.style={
   , linkcolor=black}
 
 
-
+\usepackage[final]{microtype}
