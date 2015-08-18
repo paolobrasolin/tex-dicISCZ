@@ -133,12 +133,12 @@ sympy-plots-for-*.tex/
 
 #introduction/*
 #letters/*
-morpho/*
+#morpho/*
 phon/*
 
 #!introduction/DUMMYFILE
 #!letters/DUMMYFILE
-!morpho/DUMMYFILE
+#!morpho/DUMMYFILE
 !phon/DUMMYFILE
 
 !mal-icelandic-min-rules.xdy
