@@ -5,12 +5,12 @@
 \input{preamble}
 
 \newif\ifmakecovers        \makecoversfalse
-\newif\ifmakefrontmatter   \makefrontmatterfalse
-\newif\ifinputintroduction \inputintroductionfalse
-\newif\ifinputletters      \inputlettersfalse
+\newif\ifmakefrontmatter   \makefrontmattertrue
+\newif\ifinputintroduction \inputintroductiontrue
+\newif\ifinputletters      \inputletterstrue
 \newif\ifinputphon         \inputphonfalse
-\newif\ifinputmorpho       \inputmorphotrue
-\newif\ifmakebackmatter    \makebackmatterfalse
+\newif\ifinputmorpho       \inputmorphofalse
+\newif\ifmakebackmatter    \makebackmattertrue
 \newif\ifmakeapendix       \makeapendixfalse
 
 % ################################################################# DOCUMENT #
@@ -111,28 +111,28 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 
 \chapter{Průvodce po slovníku}
 \begin{multicols}{2}
-\input{introduction/instructions}
+%\input{introduction/instructions}
 \end{multicols}
 
 % ---------------------------------------- List of abbreviations and symbols -
 
 \chapter{Seznam použitých zkratek a symbolů}
-\begin{multicols}{2}
-\begin{description}
+%\begin{multicols}{2}
+%\begin{description}
 %[\breaklabel\setleftmargin{40pt}\setlabelstyle{\bfseries}
 %\addtolength{\itemsep}{-0.5\baselineskip}]
-\input{introduction/zkratky.tex}
-\end{description}
-\end{multicols}
+%\input{introduction/zkratky.tex}
+%\end{description}
+%\end{multicols}
 
 \chapter{Skrá yfir skammstafanir og tákn}
-\begin{multicols}{2}
-\begin{description}
+%\begin{multicols}{2}
+%\begin{description}
 %[\breaklabel\setleftmargin{40pt}\setlabelstyle{\bfseries}
 %\addtolength{\itemsep}{-0.5\baselineskip}]
-\input{introduction/zkratky_is}
-\end{description}
-\end{multicols}
+%\input{introduction/zkratky_is}
+%\end{description}
+%\end{multicols}
 
 \fi
 
@@ -160,8 +160,8 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 %  %n,o,oo,p,r,s,t,u,uu,v,w,y,yy,th,ae,oe
 %  }
 
-%\foreach \l in \alphabet{
-%  \input{letters/\l.tex}}
+\foreach \x in \alphabet{
+  \index[figures]{\x asdasd}}
 
 \input{letters}
 
@@ -243,9 +243,9 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 \cleardoublepage
 %\pagestyle{empty}
 %\pagestyle{indexstyle}
-%\phantomsection
-%\addcontentsline{toc}{chapter}
-%  {Seznam autorů fotografií a ilustrací}         \label{sec:photo}
+\phantomsection
+\addcontentsline{toc}{chapter}
+  {Seznam autorů fotografií a ilustrací}         \label{sec:photo}
 \printindex[figures]
 
 % ------------------------------------------------------------- Bibliography -

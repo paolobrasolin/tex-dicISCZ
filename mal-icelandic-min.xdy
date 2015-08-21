@@ -59,6 +59,7 @@
 ;; even though we comment out (%) the letter-group heading,
 ;; the following is useful if you want to check the .ind-file
 (markup-letter-group :open-head "~n  % ")
+;; (markup-letter-group :open-head "~n\mygroup{" :close-head "}")
 
 ;; The indexentries (item_<..> specifiers)
 
