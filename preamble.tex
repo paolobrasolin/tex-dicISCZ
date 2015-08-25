@@ -508,7 +508,7 @@
 
 % THUMB INDEXES
 % new counter to hold the current number of the letter to determine the vertical position
-\newcounter{letternum}
+\newcounter{thCurrentNum}
 % newcounter for the sum of all letters to get the right height of a box
 %\newcounter{lettersum}
 %\setcounter{lettersum}{34}
@@ -530,11 +530,10 @@
 \usepackage{everypage}
 
 
-\def\thumblast{}  % Last thumb of previous page
-\def\thumbstack{} % Stack holding thumbs of current page
+\def\thLast{}  % Last thumb of previous page
+\def\thStack{} % Stack holding thumbs of current page
 % At start of page, if there are no new thumbs then use the old one
-\AddEverypageHook{\if\relax\thumbstack\relax\xdef\thumbstack{\thumblast}\fi}
-\def\thumbpush#1{\xdef\thumbstack{#1,\thumbstack}}
+\AddEverypageHook{\if\relax\thStack\relax\xdef\thStack{\thLast}\fi}
 
 \newcommand{\drawthumb}[3]{%
   \begin{tikzpicture}[remember picture, overlay]
@@ -542,26 +541,24 @@
        at ($(current page.north #2)-(0,\thumbmargin+#1\thumbheight)$) {#3};
   \end{tikzpicture}}
 
-\newcommand\drawrectothumb[1]{\drawthumb{#1}{east}{\csname Let#1\endcsname}}
-\newcommand\drawversothumb[1]{\drawthumb{#1}{west}{\csname Let#1\endcsname}}
+\newcommand\drawrectothumb[1]{\drawthumb{#1}{east}{\csname thLabel#1\endcsname}}
+\newcommand\drawversothumb[1]{\drawthumb{#1}{west}{\csname thLabel#1\endcsname}}
 
-\def\dorectothumbs{\expandafter\thumbgobblewith\thumbstack<\drawrectothumb>}
-\def\doversothumbs{\expandafter\thumbgobblewith\thumbstack<\drawversothumb>}
+\def\dorectothumbs{\expandafter\thGobbleWith\thStack<\drawrectothumb>}
+\def\doversothumbs{\expandafter\thGobbleWith\thStack<\drawversothumb>}
 
-\def\thumbgobblewith#1,#2<#3>{%
+\def\thGobbleWith#1,#2<#3>{%
   \if\relax#1\relax\else#3{#1}\fi%
-  \if\relax#2\relax\else\thumbgobblewith#2<#3>\fi%
-  \gdef\thumblast{#1,}%
-  \gdef\thumbstack{}}
+  \if\relax#2\relax\else\thGobbleWith#2<#3>\fi%
+  \gdef\thLast{#1,}%
+  \gdef\thStack{}}
 
 
 % Add a thumb to the stack
-\newcommand{\lettergroup}[1]{%
-  % step the counter of the letters
-  \refstepcounter{letternum}%
-  \expandafter\gdef\csname Let\theletternum\endcsname{#1}%
-  \thumbpush\theletternum
-}
+\def\thPush#1{
+  \refstepcounter{thCurrentNum}%
+  \expandafter\gdef\csname thLabel\thethCurrentNum\endcsname{#1}%
+  \xdef\thStack{\thethCurrentNum,\thStack}}
 
 
 % ############################################################### PAGE STYLES #
@@ -729,13 +726,13 @@
 
 \usepackage{placeins}
 
-\newcommand*{\dicLetter}[2]{%
-  \FloatBarrier\newpage\phantomsection\pdfbookmark[1]{#1}{#2}%
+\newcommand*{\dicLetter}[1]{%
+  \FloatBarrier\newpage\phantomsection\pdfbookmark[1]{#1}{LETTER#1}%
   \noindent\parbox[b][9\baselineskip][c]{\columnwidth}
     {\centering\HUGE\strut\smash{\MakeUppercase{#1}~\MakeLowercase{#1}}}%
       %\par\xdef\tpd{\the\prevdepth}
       %\par\prevdepth\tpd%
-  \expandafter\lettergroup{\MakeUppercase{#1}}}
+  \expandafter\thPush{\MakeUppercase{#1}}}
 
 
 
@@ -823,11 +820,17 @@
 
 \usepackage[final]{microtype}
 
-%\begin{document}
-%\dictionarygeometry
-%\pagestyle{myheadings}
-%\input{letters}
-%\restoregeometry
-%\pagestyle{plain}
-%\end{document}
+\usepackage{lipsum}
+
+
+\begin{document}
+\dictionarygeometry
+\pagestyle{myheadings}
+\dicLetter{þ}\lipsum\lipsum\lipsum\lipsum\lipsum\lipsum
+\dicLetter{Z}\lipsum\lipsum
+\dicLetter{A}\lipsum
+\dicLetter{B}
+\dicLetter{T}
+\dicLetter{S}\lipsum
+\end{document}
 
