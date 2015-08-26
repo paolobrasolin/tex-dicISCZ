@@ -95,7 +95,7 @@
 \newfontfamily\termFamily[Scale=MatchUppercase]{TeX Gyre Heros}
 \newfontfamily\ipaFamily[Scale=MatchLowercase]{CMU Serif}
 
-%\newcommand\textIPA[1]{{\ipaFamily#1}}
+\newcommand\textIPA[1]{{\ipaFamily#1}}
 \def\phvfamily{} % LEGACY
 
 % Extracted from the package stmaryrd:
@@ -153,6 +153,7 @@
 \makeatother
 
 \usepackage[rgb]{xcolor}
+\usepackage{xparse}
 
 \usepackage{tikz}
 \usetikzlibrary{calc}
@@ -342,7 +343,7 @@
 
 % ################################################################### FIGURES #
 
-\usepackage{adjustbox} % loads also graphicx
+\usepackage{adjustbox}
 
 \graphicspath{%
   {/home/chejnik/Dokumenty/hvalur.org/images/biolib/full/}%
@@ -372,71 +373,8 @@
   \renewcommand\dicFigure[3]{\olddicFigure{example-image-a}{#2}{#3}}
 \fi
 
-% #################################################################### COLORS #
 
-%\usepackage{color}
-
-% http://www.colorschemer.com/online.html
-% main color - grammar color
-% #66023C
-\definecolor {darkgreen}          {rgb} {0.40, 0.01, 0.24}
-
-%\definecolor {royalazure}         {rgb} {0.00, 0.22, 0.66}
-%\definecolor {brown}              {rgb} {0.40, 0.01, 0.24}
-
-% COLORS FOR THUMB INDEXES
-%\definecolor {darkblue}           {rgb}{0.00, 0.00, 0.55} 
-%\definecolor {upforestgreen}      {rgb}{0.00, 0.27, 0.13} 
-%\definecolor {islamicgreen}       {rgb}{0.00, 0.56, 0.00} 
-%\definecolor {blue(ryb)}          {rgb}{0.01, 0.28, 1.00} 
-%\definecolor {limegreen}          {rgb}{0.20, 0.80, 0.20} 
-%\definecolor {unitednationsblue}  {rgb}{0.36, 0.57, 0.90} 
-%\definecolor {screamingreen}      {rgb}{0.46, 1.00, 0.44} 
-%\definecolor {patriarch}          {rgb}{0.50, 0.00, 0.50} 
-%\definecolor {oucrimsonred}       {rgb}{0.60, 0.00, 0.00} 
-%\definecolor {babyblueeyes}       {rgb}{0.63, 0.79, 0.95} 
-%\definecolor {vividcerise}        {rgb}{0.85, 0.11, 0.51} 
-%\definecolor {orchid}             {rgb}{0.85, 0.44, 0.84} 
-%\definecolor {icterine}           {rgb}{0.99, 0.97, 0.37} 
-%\definecolor {orange-red}         {rgb}{1.00, 0.27, 0.00} 
-%\definecolor {orange(colorwheel)} {rgb}{1.00, 0.50, 0.00} 
-%\definecolor {cottoncandy}        {rgb}{1.00, 0.74, 0.85} 
-
-\definecolor {title}              {RGB} {  16,   13,   32}
-%\definecolor {golden}             {RGB} { 241,  184,   45}
-%\definecolor {freqstar}           {RGB} {  91,    3,   99}
-\definecolor {newdev}             {RGB} {   3,   11,   99}
-
-
-%\definecolor {color1}             {RGB} { 239,  222,  205}
-%\definecolor {color2}             {RGB} { 251,  206,  177}
-%\definecolor {color3}             {RGB} { 251,  185,  142}
-%\definecolor {color4}             {RGB} { 248,  166,  112}
-%\definecolor {color5}             {RGB} { 216,  231,  246}
-%\definecolor {color6}             {RGB} { 186,  215,  244}
-%\definecolor {color7}             {RGB} { 152,  197,  243}
-%\definecolor {color8}             {RGB} { 118,  181,  245}
-%\definecolor {color9}             {RGB} { 181,  249,  185}
-%\definecolor {color10}            {RGB} { 160,  248,  167}
-%\definecolor {color11}            {RGB} { 128,  247,  136}
-%\definecolor {color12}            {RGB} {  87,  248,   98}
-%\definecolor {color13}            {RGB} { 250,  241,  138}
-%\definecolor {color14}            {RGB} { 250,  240,  111}
-%\definecolor {color15}            {RGB} { 244,  239,   85}
-%\definecolor {color16}            {RGB} { 245,  239,   57}
-
-%\definecolor {lightgrey}          {RGB} { 105,  105,  105}
-%\definecolor {darkgreen_real}     {rgb} {0.00, 0.50, 0.00}
-
-
-
-
-
-
-
-
-
-% ############################################################# THUMB INDEXES #
+% ################################################################## ALPHABET #
 
 \def\alphabet
   {a,á,b,c,d,e,é,f,g,h,i%
@@ -448,104 +386,58 @@
   ,Í,J,K,L,M,N,O,Ó,P,R,S%
   ,T,U,Ú,V,W,X,Y,Ý,Þ,Æ,Ö}
 
-
 %aábcd(ð)eéfghi
 %íjklmnoóp(q)rs
 %tuúvwxyýþæö
 
-\definecolorseries{thumbcolors}{hsb}{grad}[hsb]{0,0.9,0.7}[hsb]{-1,0,0}
-\resetcolorseries[33]{thumbcolors}
+% ##################################################################### THUMB #
 
-\definecolorset{Hsb}{thumbcolor}{}
-  {1,    1, .8, .7
-  ;2,   28, .8, .7
-  ;3,   46, .8, .7
-  ;4,   56, .8, .7
-  ;5,   76, .8, .7
-  ;6,  130, .8, .7
-  ;7,  153, .8, .7
-  ;8,  174, .8, .7
-  ;9,  196, .8, .7
-  ;10, 211, .8, .7
-  ;11, 230, .8, .7}
+\definecolorset{Hsb}{dicThPalette}{}
+  {1,    1, .8, .7  ;2,   28, .8, .7  ;3,   46, .8, .7  ;4,   56, .8, .7
+  ;5,   76, .8, .7  ;6,  130, .8, .7  ;7,  153, .8, .7  ;8,  174, .8, .7
+  ;9,  196, .8, .7  ;10, 211, .8, .7  ;11, 230, .8, .7}
 
+\def\truncdiv#1#2{((#1-(#2-1)/2)/#2)}
+%\def\moduloop#1#2{(#1-\truncdiv{#1}{#2}*#2)}
+%\def\modulo#1#2{\number\numexpr\moduloop{#1}{#2}\relax}
+\def\modplusop#1#2{(1+#1-\truncdiv{#1}{#2}*#2)}
+\def\modplus#1#2{\number\numexpr\modplusop{#1}{#2}\relax}
 
-\definecolor{color13}{RGB}{ 205,194, 18}  
-\definecolor{color14}{RGB}{ 204,162, 24}  
-\definecolor{color1} {RGB}{ 182, 86,  0}  
-\definecolor{color2} {RGB}{ 143,  9,  6}  
-\definecolor{color3} {RGB}{   3, 23,118}  
-\definecolor{color4} {RGB}{   0, 82,168}  
-\definecolor{color5} {RGB}{   0, 85,142}  
-\definecolor{color6} {RGB}{   0,115,162}  
-\definecolor{color7} {RGB}{  34,146,186}  
-\definecolor{color8} {RGB}{  40,159,153}  
-\definecolor{color9} {RGB}{   0,125,111}  
-\definecolor{color10}{RGB}{   4,107, 60}  
-\definecolor{color11}{RGB}{  71,134, 81}  
-\definecolor{color12}{RGB}{ 109,134, 42}  
+\newcommand\thColor[1]{dicThPalette\modplus{#1}{11}}
 
-\newcommand\BoxColor[1]{%
-\ifcase#1\relax
-\or thumbcolor1%
-\or thumbcolor2%
-\or thumbcolor3%
-\or thumbcolor4%
-\or thumbcolor5%
-\or thumbcolor6%
-\or thumbcolor7%
-\or thumbcolor8%
-\or thumbcolor9%
-\or thumbcolor10%
-\or thumbcolor11%
-\else\BoxColor{\the\numexpr#1-11\relax}\fi}
-
-\newcommand\OldBoxColor[1]{%
-\ifcase#1\relax
-\or color1\or color14\or color1\or color2\or color3\or color4\or color5%
-\or color6\or color7\or color8\or color9\or color10\or color11\or color12%
-\else\OldBoxColor{\the\numexpr#1-14\relax}\fi}
-
-% THUMB INDEXES
-% new counter to hold the current number of the letter to determine the vertical position
 \newcounter{thCurrentNum}
-% newcounter for the sum of all letters to get the right height of a box
-%\newcounter{lettersum}
-%\setcounter{lettersum}{34}
-% some margin settings
-\newlength\thumbheight \setlength\thumbheight {1.75\baselineskip}
-\newlength\thumbwidth  \setlength\thumbwidth  {0.4\paperwidth-0.4\textwidth}
-\newlength\thumbmargin \setlength\thumbmargin {0.5\paperheight-17\thumbheight}
-% style the boxes
-\tikzset{
-  thumb/.style={
-    text=white,
-    text centered, 
-    minimum height=\thumbheight,
-    minimum width=\thumbwidth,
-    outer sep=0pt,
-    font=\sffamily\bfseries\large,
- }}
+\newcounter{thTotalNum}
+\newlength\thHeight
+\newlength\thWidth 
+\newlength\thMargin
+\def\thFont{}
+
+\tikzset{thumb/.style={
+  text = white,
+  text centered, 
+  minimum height = \thHeight,
+  minimum width = \thWidth,
+  outer sep = 0pt,
+  font = \thFont}}
 
 \usepackage{everypage}
 
+\def\thLast{}
+\def\thStack{}
 
-\def\thLast{}  % Last thumb of previous page
-\def\thStack{} % Stack holding thumbs of current page
-% At start of page, if there are no new thumbs then use the old one
 \AddEverypageHook{\if\relax\thStack\relax\xdef\thStack{\thLast}\fi}
 
-\newcommand{\drawthumb}[3]{%
+\newcommand{\thDraw}[3]{%
   \begin{tikzpicture}[remember picture, overlay]
-    \node [thumb, fill=\BoxColor{#1}, anchor=south #2]
-       at ($(current page.north #2)-(0,\thumbmargin+#1\thumbheight)$) {#3};
+    \node [thumb, fill=\thColor{#1}, anchor=south #2]
+       at ($(current page.north #2)-(0,\thMargin+#1\thHeight)$) {#3};
   \end{tikzpicture}}
 
-\newcommand\drawrectothumb[1]{\drawthumb{#1}{east}{\csname thLabel#1\endcsname}}
-\newcommand\drawversothumb[1]{\drawthumb{#1}{west}{\csname thLabel#1\endcsname}}
+\newcommand\thDrawRecto[1]{\thDraw{#1}{east}{\csname thLabel#1\endcsname}}
+\newcommand\thDrawVerso[1]{\thDraw{#1}{west}{\csname thLabel#1\endcsname}}
 
-\def\dorectothumbs{\expandafter\thGobbleWith\thStack<\drawrectothumb>}
-\def\doversothumbs{\expandafter\thGobbleWith\thStack<\drawversothumb>}
+\def\thDoRectos{\expandafter\thGobbleWith\thStack<\thDrawRecto>}
+\def\thDoVersos{\expandafter\thGobbleWith\thStack<\thDrawVerso>}
 
 \def\thGobbleWith#1,#2<#3>{%
   \if\relax#1\relax\else#3{#1}\fi%
@@ -553,12 +445,18 @@
   \gdef\thLast{#1,}%
   \gdef\thStack{}}
 
-
-% Add a thumb to the stack
 \def\thPush#1{
   \refstepcounter{thCurrentNum}%
   \expandafter\gdef\csname thLabel\thethCurrentNum\endcsname{#1}%
   \xdef\thStack{\thethCurrentNum,\thStack}}
+
+
+% Initialize dictionary thumb style
+\setcounter{thTotalNum}{33}
+\setlength\thHeight {1.75\baselineskip}
+\setlength\thWidth  {0.4\paperwidth-0.4\textwidth}
+\setlength\thMargin {0.5\paperheight-17\thHeight}
+\def\thFont{\sffamily\bfseries\large}
 
 
 % ############################################################### PAGE STYLES #
@@ -577,9 +475,8 @@
 \fancypagestyle{myheadings}{
   \fancyhf\relax                       % Clear header/footer
   \renewcommand \headrulewidth {0.4pt} % Thin header rule
-  %\fancyhead[CO,CE]{\thepage}          % Page number in header, centred
-  \fancyhead[CO]{\thepage\dorectothumbs}
-  \fancyhead[CE]{\thepage\doversothumbs}
+  \fancyhead[CO]{\thepage\thDoRectos}  % Page number in header, centred,
+  \fancyhead[CE]{\thepage\thDoVersos}  %   automatic handling of thumbs
   \fancyhead[LE,LO]{\termFamily\bfseries\rightmark}
   \fancyhead[RE,RO]{\termFamily\bfseries\leftmark}
 }
@@ -645,16 +542,14 @@
 
 
 % #################################################### ASSORTED CUSTOM MACROS #
-
-
-
 \newcommand\blspace[1][1]{\vspace{#1\baselineskip}}
-
 
 
 % ####################################################### DICTIONARY COMMANDS #
 
-\usepackage{xparse}
+\definecolor {darkgreen} {rgb} {0.40, 0.01, 0.24}
+\definecolor {title}     {RGB} {  16,   13,   32}
+\definecolor {newdev}    {RGB} {   3,   11,   99}
 
 \newcommand \dicsymFrequent  {\raisebox{-.2ex}{\color{darkgreen}\ding{167}}}
 \newcommand \dicsymSee       {$\shortrightarrow$}
@@ -714,7 +609,8 @@
 \newcommand\dicPhraseIS[1]{\textIS{\textbf{#1}}}
 \NewDocumentCommand\dicIdiom{mo}
   {\dicSubEntry{\color{newdev}\dicStyleIntTerm{#1} %
-     \IfValueTF{#2}{+ \dicStyleIntTerm{#2} \markboth{#1 + #2}{#1 + #2}}{\markboth{#1}{#1}}}\dicsymIdiom}
+     \IfValueTF{#2}{+ \dicStyleIntTerm{#2} \markboth{#1 + #2}{#1 + #2}}%
+                   {\markboth{#1}{#1}}}\dicsymIdiom}
 \newcommand\dicProverb
   {\dicSubEntry\dicsymProverb}
 
@@ -727,19 +623,12 @@
 \usepackage{placeins}
 
 \newcommand*{\dicLetter}[1]{%
-  \FloatBarrier\newpage\phantomsection\pdfbookmark[1]{#1}{LETTER#1}%
+  \FloatBarrier\newpage\phantomsection\pdfbookmark[1]{#1}{LETTER\thethCurrentNum}%
   \noindent\parbox[b][9\baselineskip][c]{\columnwidth}
     {\centering\HUGE\strut\smash{\MakeUppercase{#1}~\MakeLowercase{#1}}}%
       %\par\xdef\tpd{\the\prevdepth}
       %\par\prevdepth\tpd%
   \expandafter\thPush{\MakeUppercase{#1}}}
-
-
-
-
-
-
-
 
   
 %tabulky
@@ -823,14 +712,15 @@
 \usepackage{lipsum}
 
 
-\begin{document}
-\dictionarygeometry
-\pagestyle{myheadings}
-\dicLetter{þ}\lipsum\lipsum\lipsum\lipsum\lipsum\lipsum
-\dicLetter{Z}\lipsum\lipsum
-\dicLetter{A}\lipsum
-\dicLetter{B}
-\dicLetter{T}
-\dicLetter{S}\lipsum
-\end{document}
+%\begin{document}
+%%\foreach \lett in {\alphabet}{\expandafter\dicLetter{\lett}}
+%\dictionarygeometry
+%\pagestyle{myheadings}
+%\dicLetter{R}\lipsum\lipsum\lipsum\lipsum\lipsum\lipsum
+%\dicLetter{Z}\lipsum\lipsum
+%\dicLetter{A}\lipsum
+%\dicLetter{þ}
+%\dicLetter{T}
+%\dicLetter{S}\lipsum
+%\end{document}
 

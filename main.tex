@@ -5,12 +5,12 @@
 \input{preamble}
 
 \newif\ifmakecovers        \makecoversfalse
-\newif\ifmakefrontmatter   \makefrontmattertrue
-\newif\ifinputintroduction \inputintroductiontrue
+\newif\ifmakefrontmatter   \makefrontmatterfalse
+\newif\ifinputintroduction \inputintroductionfalse
 \newif\ifinputletters      \inputletterstrue
 \newif\ifinputphon         \inputphonfalse
 \newif\ifinputmorpho       \inputmorphofalse
-\newif\ifmakebackmatter    \makebackmattertrue
+\newif\ifmakebackmatter    \makebackmatterfalse
 \newif\ifmakeapendix       \makeapendixfalse
 
 % ################################################################# DOCUMENT #
@@ -141,8 +141,8 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 \chapter{Heslová část}
 
 
-\foreach \l [count=\n] in \alphabet{
-  \drawthumb{\n}{east}{\l}}
+%\foreach \l [count=\n] in \alphabet{
+%  \drawthumb{\n}{east}{\l}}
 
 \clearpage
 
@@ -160,8 +160,8 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 %  %n,o,oo,p,r,s,t,u,uu,v,w,y,yy,th,ae,oe
 %  }
 
-\foreach \x in \alphabet{
-  \index[figures]{\x asdasd}}
+%\foreach \x in \alphabet{
+%  \index[figures]{\x asdasd}}
 
 \input{letters}
 
