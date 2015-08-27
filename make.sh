@@ -5,12 +5,12 @@
 # vlna -l -m -n -v KkSsVvZzOoUuAaIi introduction/instructions.tex
 # vlna -l -m -n -v KkSsVvZzOoUuAaIi letters.tex
 
-# First run to generate the index file and mal/style
-xelatex main
+# First run needs to run xindy
+xelatex --shell-escape --output-dir=tmp main.tex
 
 # First we convert the *.idx encoding to UTF8
-texlua iec2utf.lua < figures.idx | \
-  xindy -M texindy -M mal-icelandic-min -M style -o figures.ind
+#texlua iec2utf.lua < figures.idx | \
+#  xindy -M texindy -M mal-icelandic-min -M style -o figures.ind
 # then we pipe the result to xindy that sets it with our modules
 
 # Standard bibliography compilation
@@ -19,4 +19,6 @@ texlua iec2utf.lua < figures.idx | \
 # Finishing runs
 #xelatex main
 #xelatex main
+
+mv tmp/main.pdf ./
 

@@ -4,19 +4,22 @@
 
 \input{preamble}
 
-\newif\ifmakecovers        \makecoversfalse
-\newif\ifmakefrontmatter   \makefrontmatterfalse
-\newif\ifinputintroduction \inputintroductionfalse
+\newif\ifmakecovers        \makecoverstrue
+\newif\ifmakefrontmatter   \makefrontmattertrue
+\newif\ifinputintroduction \inputintroductiontrue
 \newif\ifinputletters      \inputletterstrue
-\newif\ifinputphon         \inputphonfalse
-\newif\ifinputmorpho       \inputmorphofalse
-\newif\ifmakebackmatter    \makebackmatterfalse
-\newif\ifmakeapendix       \makeapendixfalse
+\newif\ifinputphon         \inputphontrue
+\newif\ifinputmorpho       \inputmorphotrue
+\newif\ifmakebackmatter    \makebackmattertrue
+\newif\ifmakeapendix       \makeapendixtrue
+
 
 % ################################################################# DOCUMENT #
 
 \begin{document}
-%\pagenumbering{gobble}
+
+\pagenumbering{gobble}
+
 
 % -------------------------------------------------------------- Front cover -
 
@@ -29,33 +32,34 @@
 
 \ifmakefrontmatter 
 
+
 % ------------------------------------------------------------------ Patitul -
 
 \cleardoublepage
 
 \begin{center}
-  %\vspace*{2cm}{\fontsize{20}{20}\selectfont\scshape\dictnameCZ\\\dictnameIS}
   \vspace*{\stretch 1}
   {\Huge\scshape\dictnameCZ\\\dictnameIS}
   \vspace{\stretch 4}
 \end{center}
+
 
 % -------------------------------------------------------------------- Titut -
 
 \cleardoublepage
 
 \begin{center}
-  %\vspace*{2cm}{\fontsize{24}{24}\selectfont\scshape\dictnameCZ\\\dictnameIS}
   \vspace*{\stretch 1}
   {\HUGE\scshape\dictnameCZ\\\dictnameIS}
   \vspace{\stretch 2}
 \end{center}
 
+
 % ----------------------------------------------------------------- Impresum -
 
 \clearpage
 
-\noindent\begin{minipage}[t][\textheight][t]{\textwidth}
+\noindent%\begin{minipage}[t][\textheight][t]{\textwidth}
 Autoři \textit{Islandsko-českého studijního slovníku}:\\
   \textbf{Aleš Chejn, Ján Zaťko, Jón Gíslason}\\[\baselineskip]
 Autor \textit{Islandské gramatiky}:\\
@@ -68,17 +72,19 @@ Poděkování:\\
 Finanční příspěvek na výtisk exemplářů určených knihovnám\\ v České republice,
 Slovenské republice a na Islandu poskytl:\\
   \textbf{Petr Mikeš, Dorota Nierychlewska-Chejn, Jiřina Chejnová, Otta Chejn}
-  \\[36\baselineskip]
+  \\[34\baselineskip]
 \textbf{Hvalur.org - \the\year}\\
 Licence: \textbf{GNU Free Documentation License}\\
-Sazba: \textbf{Paolo al-Imk\=an\=\i\ Brasolin} v prostředí  \textbf\LaTeX\\
-  Zvláštní poděkování patří uživatelům  \textbf{\TeX\ - \LaTeX\ Stack Exchange}\\[\baselineskip]
+Sazba: \textbf{Paolo al-Imk\=an\=\i\ Brasolin} v prostředí  \textbf\XeLaTeX\\
+  Zvláštní poděkování patří uživatelům
+  \textbf{\TeX\ - \LaTeX\ Stack Exchange}\\[\baselineskip]
 \textbf\ISBN\\[\baselineskip]
 Design pevné vazby: \textbf{Dorota Nierychlewska-Chejn, Jiřina Chejnová}\\
 Tisk: \textbf{Tiskárna Melmen, Pardubice}\\
 Heslová část vysázena patkovým fontem \TeX\ Gyre Pagella,
 hesla bezpatkovým fontem {\phvfamily Helvetica}.
-\end{minipage}
+%\end{minipage}
+
 
 % -------------------------------------------------------- Table of contents -
 
@@ -92,20 +98,24 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 
 \fi
 
+
 % ============================================================= INTRODUCTION =
 
 \ifinputintroduction
+
 
 % ------------------------------------- The study Icelandic-Czech dictionary -
 
 \chapter{O Islandsko-českém studijním slovníku}
 \input{introduction/uvod}
 
+
 % ------------ The history of the formation Icelandic-Czech dictionary study -
 
 \chapter{Historie tvorby Islandsko-českého studijního slovníku}
 \longchapterskip
 \input{introduction/historie}
+
 
 % -------------------------------------------------  Guide to the dictionary -
 
@@ -114,37 +124,35 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 %\input{introduction/instructions}
 \end{multicols}
 
+
 % ---------------------------------------- List of abbreviations and symbols -
 
 \chapter{Seznam použitých zkratek a symbolů}
-%\begin{multicols}{2}
-%\begin{description}
+\begin{multicols}{2}
+\begin{description}
 %[\breaklabel\setleftmargin{40pt}\setlabelstyle{\bfseries}
 %\addtolength{\itemsep}{-0.5\baselineskip}]
-%\input{introduction/zkratky.tex}
-%\end{description}
-%\end{multicols}
+\input{introduction/zkratky.tex}
+\end{description}
+\end{multicols}
 
 \chapter{Skrá yfir skammstafanir og tákn}
-%\begin{multicols}{2}
-%\begin{description}
+\begin{multicols}{2}
+\begin{description}
 %[\breaklabel\setleftmargin{40pt}\setlabelstyle{\bfseries}
 %\addtolength{\itemsep}{-0.5\baselineskip}]
-%\input{introduction/zkratky_is}
-%\end{description}
-%\end{multicols}
+\input{introduction/zkratky_is}
+\end{description}
+\end{multicols}
 
 \fi
+
 
 % ------------------------------------------- The Alphabet / the Headword part
 
 \chapter{Heslová část}
+\input{introduction/alphabet}
 
-
-%\foreach \l [count=\n] in \alphabet{
-%  \drawthumb{\n}{east}{\l}}
-
-\clearpage
 
 % =========================================================== THE DICTIONARY =
 
@@ -155,20 +163,13 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 \dictionarygeometry
 \pagestyle{myheadings}
 
-%\newcommand*{\alphabet}{%
-%  a%,aa,b,c,d,dd,e,ee,f,g,h,i,ii,j,k,l,m,
-%  %n,o,oo,p,r,s,t,u,uu,v,w,y,yy,th,ae,oe
-%  }
-
-%\foreach \x in \alphabet{
-%  \index[figures]{\x asdasd}}
-
 \input{letters}
 
 \restoregeometry
 \pagestyle{plain}
 
 \fi
+
 
 % ================================================================ PHONETICS =
 
@@ -179,7 +180,7 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 \chapter{Fonetika}                               \label{sec:phon}
 
 \section{Seznam islandských fonémů}              \label{sec:phon_phonems}
-\input{phon/phonems}
+\LTXtable{\columnwidth}{phon/phonems}
 \clearpage
 
 \section{Výslovnost islandských samohlásek}      \label{sec:phon_vowels}
@@ -200,8 +201,7 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 \chapter{Morfologický klíč}                      \label{sec:morpho}
 
 \section{Podstatné jméno, rod mužský}            \label{sec:morpho_m}
-%\input{morpho/m}
-{\small\LTXfw{morpho/m}}
+%{\small\LTXfw{morpho/m}}
 %\input{morpho/m_info}
 \clearpage
 

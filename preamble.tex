@@ -5,6 +5,7 @@
 %\documentclass[10pt, a4paper, twoside, openright]{extbook}
 %\documentclass[ 8pt, B5paper, twoside, openright]{extbook} 
 
+\newlength\lead \setlength\lead{9.6pt} % = 1.2 * 8pt
 
 % ########################################################### PAGE GEOMETRIES #
 
@@ -12,9 +13,9 @@
 
 % Basic geometry of document
 \geometry
-  { headsep    =   \baselineskip
-  , textwidth  = 42\baselineskip
-  , textheight = 60\baselineskip
+  { headsep    =   \lead
+  , textwidth  = 42\lead
+  , textheight = 60\lead
   , hmarginratio = 2:3
   , vmarginratio = 2:3
   , bindingoffset = 0cm
@@ -23,8 +24,8 @@
 
 % Geometry of the dictionary section
 \newcommand\dictionarygeometry{\newgeometry
-  { textwidth  = 42\baselineskip
-  , textheight = 60\baselineskip
+  { textwidth  = 42\lead
+  , textheight = 60\lead
   , hmarginratio = 2:3
   , vmarginratio = 3:2
   , bindingoffset = 0cm
@@ -36,8 +37,8 @@
 
 \usepackage{polyglossia}
 
-\setmainlanguage{icelandic}
-\setotherlanguage{czech}
+\setmainlanguage{czech}%{icelandic}
+\setotherlanguage{icelandic}%{czech}
 \setotherlanguage{latin}
 
 % We wrap these up, just in case 
@@ -56,7 +57,7 @@
 %% ------------------ THIS IS EVIL AND SHOULD NEVER BE DONE -------------------
 %% Don't smash anything if we are on the first run to produce the index
 %\IfFileExists{figures.idx}{
-%  % Czech uppercase letters with diacritics:
+  % Czech uppercase letters with diacritics:
   \newunicodechar{Á}{\strut\smash{\' A}} % 00C1
   \newunicodechar{Č}{\strut\smash{\v C}} % 010C
   \newunicodechar{Ď}{\strut\smash{\v D}} % 010E
@@ -96,6 +97,7 @@
 \newfontfamily\ipaFamily[Scale=MatchLowercase]{CMU Serif}
 
 \newcommand\textIPA[1]{{\ipaFamily#1}}
+\newcommand\IPAfont[1]{\ipaFamily#1}
 \def\phvfamily{} % LEGACY
 
 % Extracted from the package stmaryrd:
@@ -114,20 +116,20 @@
 
 % #################################################################### LAYOUT #
 
-\def\HUGE {\fontsize{23.887872pt}{3\baselineskip}\selectfont}
-\def\Huge {\fontsize{19.906560pt}{3\baselineskip}\selectfont}
-\def\huge {\fontsize{16.588800pt}{3\baselineskip}\selectfont}
-\def\LARGE{\fontsize{13.824000pt}{2\baselineskip}\selectfont}
-\def\Large{\fontsize{11.520000pt}{2\baselineskip}\selectfont}
-\def\large{\fontsize{ 9.600000pt}{2\baselineskip}\selectfont}
-% \normalsize is {8pt}{9.6pt}
+\def\normalsize{\fontsize{8pt}{1\lead}\selectfont}
+\def\large{\fontsize{ 9.600000pt}{2\lead}\selectfont}
+\def\Large{\fontsize{11.520000pt}{2\lead}\selectfont}
+\def\LARGE{\fontsize{13.824000pt}{2\lead}\selectfont}
+\def\huge {\fontsize{16.588800pt}{3\lead}\selectfont}
+\def\Huge {\fontsize{19.906560pt}{3\lead}\selectfont}
+\def\HUGE {\fontsize{23.887872pt}{3\lead}\selectfont}
 
 % Two columns layout
-\setlength\columnsep    {2\baselineskip}
+\setlength\columnsep    {2\lead}
 \setlength\columnseprule{0.4pt}
 
 % Necessary for baseline alignment
-\topskip=\baselineskip
+\topskip=\lead
 \raggedbottom
 \setlength\parskip{0pt} % it's better to avoid glue
 
@@ -179,7 +181,7 @@
 \usepackage[ISBN=978-80-260-2385-2,SC0]{ean13isbn}
 
 \usepackage{pgffor}
-
+\usepackage{metalogo}
 
 % ############################################################ BASELINE GRID #
 
@@ -501,22 +503,22 @@
 % ################################################################ SECTIONING #
 \usepackage[explicit]{titlesec}
 
-\setlength{\beforetitleunit}{\baselineskip}
-\setlength{\aftertitleunit} {\baselineskip}
+\setlength \beforetitleunit {\lead}
+\setlength \aftertitleunit  {\lead}
 
 \titlespacing*{\chapter}   {0em}{*0}{*3} % Remember there's a topskip too
 \titlespacing*{\section}   {0em}{*1}{*2}
 \titlespacing*{\subsection}{0em}{*1}{*2}
 
 \newcommand\ghostdrop[2]{%
-  \raisebox{-#1\baselineskip}[0pt][0pt]{#2}}
+  \raisebox{-#1\lead}[0pt][0pt]{#2}}
 
 \titleformat {\chapter} {} {} {0pt} % {#1}
   {\ghostdrop{1.0}{\parbox[t]{\columnwidth}
      {\LARGE\bfseries\centering\MakeUppercase{#1}}}}
 
-\def\longchapterskip{\vspace{2\baselineskip}}
-\def\longsectionskip{\vspace{2\baselineskip}}
+\def\longchapterskip{\vspace{2\lead}}
+\def\longsectionskip{\vspace{2\lead}}
 
 \titleformat {\section} {\bfseries} {} {0pt}
   {\ghostdrop{1.0}{\parbox[t]{\columnwidth}
@@ -697,7 +699,7 @@
   , pdfauthor={Aleš Chejn, Jón Gíslason, Ján Zaťko}
   , pdfsubject={Islandsko-český studijní slovník}
   , pdfkeywords={Islandsko-český studijní slovník%
-               , islandština, čeština, slovník}
+                , islandština, čeština, slovník}
   , bookmarks=true
   , colorlinks=true
   , citecolor=black
@@ -708,19 +710,4 @@
 % ################################################################# MICROTYPE #
 
 \usepackage[final]{microtype}
-
-\usepackage{lipsum}
-
-
-%\begin{document}
-%%\foreach \lett in {\alphabet}{\expandafter\dicLetter{\lett}}
-%\dictionarygeometry
-%\pagestyle{myheadings}
-%\dicLetter{R}\lipsum\lipsum\lipsum\lipsum\lipsum\lipsum
-%\dicLetter{Z}\lipsum\lipsum
-%\dicLetter{A}\lipsum
-%\dicLetter{þ}
-%\dicLetter{T}
-%\dicLetter{S}\lipsum
-%\end{document}
 
