@@ -56,25 +56,25 @@
 %% Smashing uppercase letters with diacritics
 %% ------------------ THIS IS EVIL AND SHOULD NEVER BE DONE -------------------
 %% Don't smash anything if we are on the first run to produce the index
-%\IfFileExists{figures.idx}{
-  % Czech uppercase letters with diacritics:
-  \newunicodechar{Á}{\strut\smash{\' A}} % 00C1
-  \newunicodechar{Č}{\strut\smash{\v C}} % 010C
-  \newunicodechar{Ď}{\strut\smash{\v D}} % 010E
-  \newunicodechar{É}{\strut\smash{\' E}} % 00C9
-  \newunicodechar{Ě}{\strut\smash{\v E}} % 011A
-  \newunicodechar{Í}{\strut\smash{\' I}} % 00CD
-  \newunicodechar{Ň}{\strut\smash{\v N}} % 0147
-  \newunicodechar{Ó}{\strut\smash{\' O}} % 00D3
-  \newunicodechar{Ř}{\strut\smash{\v R}} % 0158
-  \newunicodechar{Š}{\strut\smash{\v S}} % 0160
-  \newunicodechar{Ť}{\strut\smash{\v T}} % 0164
-  \newunicodechar{Ú}{\strut\smash{\' U}} % 00DA
-  \newunicodechar{Ů}{\strut\smash{\r U}} % 016E
-  \newunicodechar{Ý}{\strut\smash{\' Y}} % 00DD
-  \newunicodechar{Ž}{\strut\smash{\v Z}} % 017D
-  % Icelandic uppercase letters with diacritics: ÁÉÍÓÚÝ (ÐÞÆ) and
-  \newunicodechar{Ö}{\strut\smash{\" O}} % 00D6
+%\IfFileExists{tmp/figures.idx}{
+%  % Czech uppercase letters with diacritics:
+%  \newunicodechar{Á}{\strut\smash{\' A}} % 00C1
+%  \newunicodechar{Č}{\strut\smash{\v C}} % 010C
+%  \newunicodechar{Ď}{\strut\smash{\v D}} % 010E
+%  \newunicodechar{É}{\strut\smash{\' E}} % 00C9
+%  \newunicodechar{Ě}{\strut\smash{\v E}} % 011A
+%  \newunicodechar{Í}{\strut\smash{\' I}} % 00CD
+%  \newunicodechar{Ň}{\strut\smash{\v N}} % 0147
+%  \newunicodechar{Ó}{\strut\smash{\' O}} % 00D3
+%  \newunicodechar{Ř}{\strut\smash{\v R}} % 0158
+%  \newunicodechar{Š}{\strut\smash{\v S}} % 0160
+%  \newunicodechar{Ť}{\strut\smash{\v T}} % 0164
+%  \newunicodechar{Ú}{\strut\smash{\' U}} % 00DA
+%  \newunicodechar{Ů}{\strut\smash{\r U}} % 016E
+%  \newunicodechar{Ý}{\strut\smash{\' Y}} % 00DD
+%  \newunicodechar{Ž}{\strut\smash{\v Z}} % 017D
+%  % Icelandic uppercase letters with diacritics: ÁÉÍÓÚÝ (ÐÞÆ) and
+%  \newunicodechar{Ö}{\strut\smash{\" O}} % 00D6
 %}{}
 %% ------------------ THAT WAS EVIL AND SHOULD NEVER BE DONE ------------------
 %
@@ -225,7 +225,7 @@
   \end{tikzpicture}}
 
 % Draw a baseline grid on every page
-%\AddToShipoutPicture{\drawbaselinegrid}
+\AddToShipoutPicture{\drawbaselinegrid}
 
 
 % ################################################################## METADATA #
@@ -595,10 +595,12 @@
 \NewDocumentCommand\dicMaybeSub{m}
   {\IfValueT{#1}{\nobreak\textsubscript{#1}}}
 
-\NewDocumentCommand\dicTerm{smod<>} % \dicTerm*{term}[te·r|m]<2>
+\NewDocumentCommand\dicTerm{smod<>s} % \dicTerm*{term}[te·r|m]<2>
   {\refstepcounter{terms}\label{term:#2\IfValueT{#4}{:#4}}%
-   \textIS{\termFont\IfValueTF{#3}{\textAlt{#3}{#2}}{#2}%
-   \dicMaybeSuper{#4}}}
+   \textIS{\termFont\IfValueTF{#3}{\textAlt{#3}{#2}}{#2}\dicMaybeSuper{#4}}}
+
+\NewDocumentCommand\dicTermDemo{smod<>s} % \dicTerm*{term}[te·r|m]<2>
+  {\textIS{\termFont\IfValueTF{#3}{\textAlt{#3}{#2}}{#2}\dicMaybeSuper{#4}}}
 
 \NewDocumentCommand\dicIPA{mo}
   {{\IPAFont[#1]}}

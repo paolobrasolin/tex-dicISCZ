@@ -14,10 +14,10 @@ xelatex --shell-escape --output-dir=tmp main.tex
 # then we pipe the result to xindy that sets it with our modules
 
 # Standard bibliography compilation
-biber --input-dir=tmp --output-dir=tmp main
+#biber --input-dir=tmp --output-dir=tmp main
 
 # Finishing runs
-xelatex --output-dir=tmp main.tex
+#xelatex --output-dir=tmp main.tex
 #xelatex main
 
 mv tmp/main.pdf ./

@@ -7,7 +7,7 @@
 \newif\ifmakecovers        \makecoversfalse
 \newif\ifmakefrontmatter   \makefrontmattertrue
 \newif\ifinputintroduction \inputintroductiontrue
-\newif\ifinputletters      \inputletterstrue
+\newif\ifinputletters      \inputlettersfalse
 \newif\ifinputphon         \inputphontrue
 \newif\ifinputmorpho       \inputmorphotrue
 \newif\ifmakebackmatter    \makebackmattertrue
@@ -120,30 +120,30 @@ Tisk: \textbf{Tiskárna Melmen, Pardubice}\\
 % -------------------------------------------------  Guide to the dictionary -
 
 \chapter{Průvodce po slovníku}
-\begin{multicols}{2}
-%\input{introduction/instructions}
-\end{multicols}
+\begin{multicols*}{2}
+\input{introduction/instructions}
+\end{multicols*}
 
 
 % ---------------------------------------- List of abbreviations and symbols -
 
 \chapter{Seznam použitých zkratek a symbolů}
-\begin{multicols}{2}
+\begin{multicols*}{2}
 \begin{description}
 %[\breaklabel\setleftmargin{40pt}\setlabelstyle{\bfseries}
 %\addtolength{\itemsep}{-0.5\baselineskip}]
 \input{introduction/zkratky.tex}
 \end{description}
-\end{multicols}
+\end{multicols*}
 
 \chapter{Skrá yfir skammstafanir og tákn}
-\begin{multicols}{2}
+\begin{multicols*}{2}
 \begin{description}
 %[\breaklabel\setleftmargin{40pt}\setlabelstyle{\bfseries}
 %\addtolength{\itemsep}{-0.5\baselineskip}]
 \input{introduction/zkratky_is}
 \end{description}
-\end{multicols}
+\end{multicols*}
 
 \fi
 
