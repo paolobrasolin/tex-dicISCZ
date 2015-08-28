@@ -4,14 +4,14 @@
 
 \input{preamble}
 
-\newif\ifmakecovers        \makecoverstrue
+\newif\ifmakecovers        \makecoversfalse
 \newif\ifmakefrontmatter   \makefrontmattertrue
 \newif\ifinputintroduction \inputintroductiontrue
 \newif\ifinputletters      \inputletterstrue
 \newif\ifinputphon         \inputphontrue
 \newif\ifinputmorpho       \inputmorphotrue
 \newif\ifmakebackmatter    \makebackmattertrue
-\newif\ifmakeapendix       \makeapendixtrue
+\newif\ifmakeapendix       \makeapendixfalse
 
 
 % ################################################################# DOCUMENT #
@@ -269,8 +269,7 @@ hesla bezpatkovým fontem {\phvfamily Helvetica}.
 % \EANisbn[SC5b] \EANisbn
 \pagenumbering{gobble}
 \cleardoublepage\null\clearpage % clear to verso
-\vspace*\fill
-\EANisbn[SC3]
+\vspace*\fill\EANisbn[SC3]
 
 \fi
 

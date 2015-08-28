@@ -1,6 +1,6 @@
 % ############################################################ DOCUMENT CLASS #
 
-\documentclass[ demo, 8pt, c5paper, twoside, openright]{extbook}
+\documentclass[ 8pt, c5paper, twoside, openright]{extbook}
 
 %\documentclass[10pt, a4paper, twoside, openright]{extbook}
 %\documentclass[ 8pt, B5paper, twoside, openright]{extbook} 
@@ -308,6 +308,9 @@
 
 \newcommand\LTXfw[1]{\LTXtable{\columnwidth}{#1}}
 
+\LTpre=0pt
+\LTpost=0pt
+
 % ------------------------------------------------- I HAVE NO CLUE WHAT THIS IS
 \begingroup
   \makeatletter
@@ -329,12 +332,12 @@
 
 % These values ensure that for top, mid and bottom rules
 % space above + rule width + space below = baselineskip
-\setlength \abovetopsep    {0.43\baselineskip}
-\setlength \heavyrulewidth {0.10\baselineskip}
-\setlength \belowbottomsep {0.43\baselineskip}
-\setlength \aboverulesep   {0.47\baselineskip}
-\setlength \lightrulewidth {0.06\baselineskip}
-\setlength \belowrulesep   {0.47\baselineskip}
+\setlength \abovetopsep    {0.43\lead}
+\setlength \heavyrulewidth {0.10\lead}
+\setlength \belowbottomsep {0.43\lead}
+\setlength \aboverulesep   {0.47\lead}
+\setlength \lightrulewidth {0.06\lead}
+\setlength \belowrulesep   {0.47\lead}
 
 %%% % declention and conjugation tables
 %%% \usepackage{floatrow}
@@ -355,10 +358,11 @@
 \newlength\dicfigskip
 
 \newcommand\dicFigure[3]{ % {filename}{caption}{index entry}
+  \xdef\dicfigfilename{\ifdummyfigures example-image-a\else#1\fi}
   \setlength\fboxsep{0pt}\setlength\fboxrule{0.5pt}
   \def\dicfigbox{\fbox{%
     \adjincludegraphics [ max height = 0.8\columnwidth
-                        , max width  = 0.8\columnwidth ] {#1}}}
+                        , max width  = 0.8\columnwidth ] {\dicfigfilename}}}
   \setlength\abovecaptionskip {\dp\strutbox}
   \setlength\belowcaptionskip {\ht\strutbox} 
   \setlength\dicfigheight {\heightof\dicfigbox+\fboxrule}
@@ -368,12 +372,6 @@
     \centering\vspace*{\dicfigskip}\dicfigbox\caption{#2}\index[figures]{#3}
   \end{figure}
 }
-
-
-\ifdummyfigures
-  \let\olddicFigure\dicFigure
-  \renewcommand\dicFigure[3]{\olddicFigure{example-image-a}{#2}{#3}}
-\fi
 
 
 % ################################################################## ALPHABET #
