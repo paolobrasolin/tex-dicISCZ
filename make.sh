@@ -5,6 +5,8 @@
 # vlna -l -m -n -v KkSsVvZzOoUuAaIi introduction/instructions.tex
 # vlna -l -m -n -v KkSsVvZzOoUuAaIi letters.tex
 
+mkdir tmp
+
 # First run needs to run xindy
 xelatex --shell-escape --output-dir=tmp main.tex
 
