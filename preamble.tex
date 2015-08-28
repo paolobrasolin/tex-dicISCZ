@@ -87,18 +87,34 @@
 
 %\newunicodechar{·}{\BeginAccSupp{method=plain,ActualText={}}·\EndAccSupp{}}
 
+%\def\·{·}%
+%\catcode`\·=\active
+%\def ·{\·}%
+
 
 % ############################################################ FONTS, SYMBOLS #
 
 \usepackage{fontspec}
 
-\setmainfont{TeX Gyre Pagella}
-\newfontfamily\termFamily[Scale=MatchUppercase]{TeX Gyre Heros}
-\newfontfamily\ipaFamily[Scale=MatchLowercase]{CMU Serif}
+\setmainfont{LinLibertine_R}%
+  [ Extension = .otf
+  , FontFace = {m} {it}{*I}
+  , FontFace = {b} {n} {*Z}
+  , FontFace = {bx}{n} {*B}
+  ]
 
-\newcommand\textIPA[1]{{\ipaFamily#1}}
-\newcommand\IPAfont[1]{\ipaFamily#1}
-\def\phvfamily{} % LEGACY
+%\newfontfamily\termFamily[Scale=MatchUppercase]{TeX Gyre Heros}
+%\newfontfamily\ipaFamily[Scale=MatchLowercase]{CMU Serif}
+
+\def\bfseries{\fontseries{b}\selectfont}
+
+\def\termFont{\fontseries{bx}\selectfont}
+\def\IPAFont{}
+
+\newcommand\textTerm[1]{{\termFont#1}}
+\newcommand\textIPA[1]{{\IPAFont#1}}
+
+%\def\phvfamily{} % LEGACY
 
 % Extracted from the package stmaryrd:
 \DeclareSymbolFont{stmry}{U}{stmry}{m}{n}
@@ -209,7 +225,7 @@
   \end{tikzpicture}}
 
 % Draw a baseline grid on every page
-\AddToShipoutPicture{\drawbaselinegrid}
+%\AddToShipoutPicture{\drawbaselinegrid}
 
 
 % ################################################################## METADATA #
@@ -477,8 +493,8 @@
   \renewcommand \headrulewidth {0.4pt} % Thin header rule
   \fancyhead[CO]{\thepage\thDoRectos}  % Page number in header, centred,
   \fancyhead[CE]{\thepage\thDoVersos}  %   automatic handling of thumbs
-  \fancyhead[LE,LO]{\termFamily\bfseries\rightmark}
-  \fancyhead[RE,RO]{\termFamily\bfseries\leftmark}
+  \fancyhead[LE,LO]{\termFont\rightmark}
+  \fancyhead[RE,RO]{\termFont\leftmark}
 }
 
 \pagestyle{plain}  
@@ -574,27 +590,24 @@
 
 \newcounter{terms}
 
-\NewDocumentCommand\dicStyleIntTerm{m}{\textIS{{\termFamily\bfseries#1}}}
-\NewDocumentCommand\dicStyleExtTerm{m}{\textIS{\textit{#1}}}
-
 \NewDocumentCommand\dicMaybeSuper{m}
   {\IfValueT{#1}{\smash{\textsuperscript{#1}}}}
+\NewDocumentCommand\dicMaybeSub{m}
+  {\IfValueT{#1}{\nobreak\textsubscript{#1}}}
 
 \NewDocumentCommand\dicTerm{smod<>} % \dicTerm*{term}[te·r|m]<2>
   {\refstepcounter{terms}\label{term:#2\IfValueT{#4}{:#4}}%
-   \dicStyleIntTerm{\IfValueTF{#3}{\textAlt{#3}{#2}}{#2}%
+   \textIS{\termFont\IfValueTF{#3}{\textAlt{#3}{#2}}{#2}%
    \dicMaybeSuper{#4}}}
 
 \NewDocumentCommand\dicIPA{mo}
-  {{\ipaFamily[#1]}}
+  {{\IPAFont[#1]}}
 
 \NewDocumentCommand\dicPos{smo}
-  {{\color{darkgreen}\textbf{\small#2}%
-   \IfValueT{#3}{\nobreak\textsubscript{#3}}}}
+  {{\color{darkgreen}\small\textbf{#2}\dicMaybeSub{#3}}}
 
 \NewDocumentCommand\dicFlx{smo}
-  {{\color{darkgreen}\footnotesize#2%
-   \IfValueT{#3}{\nobreak\textsubscript{#3}}}}
+  {{\color{darkgreen}\footnotesize#2\dicMaybeSub{#3}}}
 
 \NewDocumentCommand\dicExampleCS{m}
   {\dicsymExampleCS~\textit{#1}}
@@ -603,16 +616,16 @@
 
 \NewDocumentCommand\dicLink{smd<>}
   {\IfBooleanF{#1}{\dicsymSee~}%
-   \hyperref[term:#2\IfValueT{#3}{:#3}]{\dicStyleIntTerm{#2\dicMaybeSuper{#3}}}}
+   \hyperref[term:#2\IfValueT{#3}{:#3}]{\textIS{\bfseries#2\dicMaybeSuper{#3}}}}
 \NewDocumentCommand\dicSynonym{smd<>}
-  {(\IfBooleanF{#1}{\dicsymSee~}\dicStyleExtTerm{#2\dicMaybeSuper{#3}})}
+  {(\IfBooleanF{#1}{\dicsymSee~}\textIS{\itshape#2\dicMaybeSuper{#3}\/})}
 \NewDocumentCommand\dicAntonym{smd<>}
-  {(\IfBooleanF{#1}{\dicsymCompare~}\dicStyleExtTerm{#2\dicMaybeSuper{#3}})}
+  {(\IfBooleanF{#1}{\dicsymCompare~}\textIS{\itshape#2\dicMaybeSuper{#3}\/})}
 
-\newcommand\dicPhraseIS[1]{\textIS{\textbf{#1}}}
+\newcommand\dicPhraseIS[1]{\textIS{\bfseries#1}}
 \NewDocumentCommand\dicIdiom{mo}
-  {\dicSubEntry{\color{newdev}\dicStyleIntTerm{#1} %
-     \IfValueTF{#2}{+ \dicStyleIntTerm{#2} \markboth{#1 + #2}{#1 + #2}}%
+  {\dicSubEntry{\color{newdev}\textIS{\termFont#1} %
+     \IfValueTF{#2}{+ \textIS{\termFont#2} \markboth{#1 + #2}{#1 + #2}}%
                    {\markboth{#1}{#1}}}\dicsymIdiom}
 \newcommand\dicProverb
   {\dicSubEntry\dicsymProverb}
@@ -711,4 +724,3 @@
 % ################################################################# MICROTYPE #
 
 \usepackage[final]{microtype}
-
