@@ -322,29 +322,36 @@
 \usepackage{longtable}
 \usepackage{ltxtable}
 
-\newcommand\LTXfw[1]{\LTXtable{\columnwidth}{#1}}
+\newcommand\LTXfw[1]{
+  \begingroup
+  \let\oldmidrule\midrule
+  \def\midrule{\nopagebreak\oldmidrule}
+  \let\oldcmidrule\cmidrule
+  \def\cmidrule(##1)##2{\nopagebreak\oldcmidrule(##1){##2}}
+  \LTXtable{\columnwidth}{#1}
+  \endgroup}
 
 \LTpre=0pt
 \LTpost=0pt
 
 % ------------------------------------------------- I HAVE NO CLUE WHAT THIS IS
-\begingroup
-  \makeatletter
-  \catcode`\-=\active
-  \AtBeginDocument{
-  \def\@@@cmidrule[#1-#2]#3#4{\global\@cmidla#1\relax
-    \global\advance\@cmidla\m@ne
-    \ifnum\@cmidla>0\global\let\@gtempa\@cmidrulea\else
-    \global\let\@gtempa\@cmidruleb\fi
-    \global\@cmidlb#2\relax
-    \global\advance\@cmidlb-\@cmidla
-    \global\@thisrulewidth=#3
-    \@setrulekerning{#4}
-    \ifnum\@lastruleclass=\z@\vskip \aboverulesep\fi
-    \ifnum0=`{\fi}\@gtempa
-    \noalign{\ifnum0=`}\fi\futurenonspacelet\@tempa\@xcmidrule}
-  }
-\endgroup
+%\begingroup
+%  \makeatletter
+%  \catcode`\-=\active
+%  \AtBeginDocument{
+%  \def\@@@cmidrule[#1-#2]#3#4{\global\@cmidla#1\relax
+%    \global\advance\@cmidla\m@ne
+%    \ifnum\@cmidla>0\global\let\@gtempa\@cmidrulea\else
+%    \global\let\@gtempa\@cmidruleb\fi
+%    \global\@cmidlb#2\relax
+%    \global\advance\@cmidlb-\@cmidla
+%    \global\@thisrulewidth=#3
+%    \@setrulekerning{#4}
+%    \ifnum\@lastruleclass=\z@\vskip \aboverulesep\fi
+%    \ifnum0=`{\fi}\@gtempa
+%    \noalign{\ifnum0=`}\fi\futurenonspacelet\@tempa\@xcmidrule}
+%  }
+%\endgroup
 
 % These values ensure that for top, mid and bottom rules
 % space above + rule width + space below = baselineskip
