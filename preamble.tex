@@ -577,10 +577,13 @@
 \NewDocumentCommand\dicStyleIntTerm{m}{\textIS{{\termFamily\bfseries#1}}}
 \NewDocumentCommand\dicStyleExtTerm{m}{\textIS{\textit{#1}}}
 
+\NewDocumentCommand\dicMaybeSuper{m}
+  {\IfValueT{#1}{\smash{\textsuperscript{#1}}}}
+
 \NewDocumentCommand\dicTerm{smod<>} % \dicTerm*{term}[te·r|m]<2>
   {\refstepcounter{terms}\label{term:#2\IfValueT{#4}{:#4}}%
-   \dicStyleIntTerm{\IfValueTF{#3}{\textAlt{#3}{#2}}{#2}}%
-   \IfValueT{#4}{\smash{\textsuperscript{#4}}}}
+   \dicStyleIntTerm{\IfValueTF{#3}{\textAlt{#3}{#2}}{#2}%
+   \dicMaybeSuper{#4}}}
 
 \NewDocumentCommand\dicIPA{mo}
   {{\ipaFamily[#1]}}
@@ -600,11 +603,11 @@
 
 \NewDocumentCommand\dicLink{smd<>}
   {\IfBooleanF{#1}{\dicsymSee~}%
-   \hyperref[term:#2\IfValueT{#3}{:#3}]{\dicStyleIntTerm{#2}}}
+   \hyperref[term:#2\IfValueT{#3}{:#3}]{\dicStyleIntTerm{#2\dicMaybeSuper{#3}}}}
 \NewDocumentCommand\dicSynonym{smd<>}
-  {(\IfBooleanF{#1}{\dicsymSee~}\dicStyleExtTerm{#2})}
+  {(\IfBooleanF{#1}{\dicsymSee~}\dicStyleExtTerm{#2\dicMaybeSuper{#3}})}
 \NewDocumentCommand\dicAntonym{smd<>}
-  {(\IfBooleanF{#1}{\dicsymCompare~}\dicStyleExtTerm{#2})}
+  {(\IfBooleanF{#1}{\dicsymCompare~}\dicStyleExtTerm{#2\dicMaybeSuper{#3}})}
 
 \newcommand\dicPhraseIS[1]{\textIS{\textbf{#1}}}
 \NewDocumentCommand\dicIdiom{mo}
